@@ -1,7 +1,8 @@
 import Home from '../src/views/Home.vue'
 import Login from '../src/views/Login.vue'
-
-// MAPEANDO AS ROTAS
+import Usuarios from "./views/cadastros/Usuarios";
+import Empresas from "./views/cadastros/Empresas.vue";
+// Mapeando as rotas
 export const routes =[{
   path:'',
   name:'login',
@@ -10,10 +11,24 @@ export const routes =[{
   menu:false
 },
   {
-    path:'',
+    path:'/home',
     name:'home',
     component:Home,
     titulo: 'Home',
+    menu:true
+  },
+  {
+    path:'/usuarios',
+    name:'usuarios',
+    component:Usuarios,
+    titulo: 'Usuarios',
+    menu:true
+  },
+  {
+    path:'/empresas',
+    name:'empresas',
+    component:Empresas,
+    titulo: 'Empresas',
     menu:true
   }
 

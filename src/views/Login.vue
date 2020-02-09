@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <titulo estilo="text-center mt-2 mb-5" titulo="Sistema de Gestão de Usuários - GSU" />
+    <titulo estilo="text-center mt-2 mb-5" titulo="Sistema de Gestão de Contratos - GSC" />
     <div class="row">
       <div class="col-sm-3">
         <!-- espaço vazio -->
@@ -31,7 +31,7 @@
           </div>
           <div class="form-group col-sm-12 mb-4">
             <router-link
-              to="/usuario"
+              to="/usuarios"
               class="badge badge-secondary col-auto float-right col-sm-6 ml-1"
             >Novo Cadastro</router-link>
             <router-link
