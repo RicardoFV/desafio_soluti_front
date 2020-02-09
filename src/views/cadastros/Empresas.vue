@@ -39,11 +39,11 @@
             <label for="natureza_juridica">Natureza Juridica :</label>
             <select id="natureza_juridica" class="form-control">
               <option value="">Selecione</option>
-              <option value="ativa">Sociedade anônima</option>
-              <option value="inativa">Sociedade de responsabilidade limitada</option>
-              <option value="ativa">Sociedade em nome colectivo</option>
-              <option value="inativa">Sociedade em comandita simples</option>
-              <option value="ativa">Sociedade em comandita por ações</option>
+              <option value="sociedade_anonima">Sociedade anônima</option>
+              <option value="sociedade_de_responsabilidade_limitada">Sociedade de responsabilidade limitada</option>
+              <option value="sociedade_em_nome_coletivo">Sociedade em nome colectivo</option>
+              <option value="sociedade_em_comandita_simples">Sociedade em comandita simples</option>
+              <option value="sociedade_em_comandita_por_acoes">Sociedade em comandita por ações</option>
             </select>
           </div>
           <div class="form-group col-md-3">
@@ -84,48 +84,38 @@
       </form>
 
       <!-- ccampo responsavel por receber o endereco -->
+
       <div class="form-row">
         <div class="form-group col-md-2">
-          <label for="rua">Rua :</label>
-          <input
-            type="text"
-            id="rua"
-            disabled="disabled"
-            class="form-control"
-            placeholder
-          />
-        </div>
-        <div class="form-group col-md-2">
-          <label for="cidade">Cidade :</label>
-          <input
-            type="text"
-            id="cidade"
-            disabled="disabled"
-            class="form-control"
-            placeholder
-          />
-        </div>
-
-        <div class="form-group col-md-2">
-          <label for="estado">Estado :</label>
-          <input
-            type="text"
-            id="estado"
-            disabled="disabled"
-            class="form-control"
-          />
-        </div>
-
-        <div class="form-group col-md-2">
-          <label for="numero_endereco">Numero :</label>
+          <label for="cep_recebido">Cep :</label>
           <input
             type="number"
-            id="numero_endereco"
+            id="cep_recebido"
             disabled="disabled"
-            name="numero_endereco"
             class="form-control"
           />
         </div>
+        <div class="form-group col-md-2">
+          <label for="logradouro">Logradouro :</label>
+          <input
+            type="text"
+            id="logradouro"
+            disabled="disabled"
+            class="form-control"
+            placeholder
+          />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="complemento">Complemento :</label>
+          <input
+            type="text"
+            id="complemento"
+            disabled="disabled"
+            class="form-control"
+            placeholder
+          />
+        </div>
+
         <div class="form-group col-md-2">
           <label for="bairro">Bairro :</label>
           <input
@@ -135,16 +125,26 @@
             class="form-control"
           />
         </div>
+
         <div class="form-group col-md-2">
-          <label for="complemento">Complemento :</label>
+          <label for="localidade">Localidade :</label>
           <input
             type="number"
-            id="complemento"
+            id="localidade"
+            disabled="disabled"
+            name="numero_endereco"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="uf">Uf :</label>
+          <input
+            type="text"
+            id="uf"
             disabled="disabled"
             class="form-control"
           />
         </div>
-
       </div>
 
       <!-- botao de envio -->
@@ -165,13 +165,53 @@
   import Titulo from "../../components/titulo/Titulo.vue";
   import Button from "../../components/button/Button.vue";
   import Login from "../Login";
+  import CepService from "../../service/CepService";
   export default {
     components:{
       Login,
       // utilizando os componentes
       MyButton: Button,
       titulo: Titulo
+    },
+    data() {
+      return {
+        cep: "",
+        msg: ""
+      };
+    },
+    methods:{
+      pequisarCep: function(evento) {
+        // se caso o digito seja menor que 8
+        if (this.cep.length < 8) {
+          this.msg = "É necessário digitar todos os caracteres";
+          // caso seja vazio
+        }
+        if (this.cep === "") {
+          this.msg = "Campo Cep não pode ser vazio";
+        } else {
+          this.service = new CepService(this.$resource);
+          this.service.consultarCep(this.cep).then(
+            dados => {
+              // faço a verificaçao se o que esta sendo recebido e diferente de erro ,
+              // igual a true , ou cep invalido
+              if (dados.erro !== true) {
+                //console.log(dados)
+                this.endereco = dados;
+                // limpa o campo de mensagem e o cep
+                this.msg = "";
+                this.cep = "";
+              } else {
+                // caso o CEP nao seja encontrado
+                this.msg = "CEP não encontrado .";
+              }
+              // vai para o erro , caso nao seja feito da forma correta
+            },
+            err => {}
+          );
+        }
+      }
     }
+
   }
 </script>
 <style>
