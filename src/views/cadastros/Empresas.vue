@@ -23,13 +23,17 @@
             <label for="inscricao_estadual">Inscrição Estadual :</label>
             <input type="number" min="0" id="inscricao_estadual" class="form-control" placeholder="Inscrição Estadual"/>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-2">
             <label for="situacao">Situação :</label>
             <select id="situacao" class="form-control">
                 <option value="">Selecione</option>
                 <option value="ativa">Ativa</option>
                 <option value="inativa">Inativa</option>
             </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="capital_social">Capital Social :</label>
+            <input type="number" min="0" id="capital_social" class="form-control" placeholder="Capital Social"/>
           </div>
           <div class="form-group col-md-3">
             <label for="natureza_juridica">Natureza Juridica :</label>
