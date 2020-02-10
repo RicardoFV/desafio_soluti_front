@@ -3,42 +3,43 @@
     <titulo estilo="text-center mt-1 mb-1" titulo="Nova Empresa"></titulo>
     <form>
         <div class="form-row">
+          <!-- formulario que cadastra os princiapis dados da empresa -->
             <div class="form-group col-md-6">
                 <label for="razao_social">Razão Social :</label>
-                <input type="text" id="razao_social" class="form-control" placeholder="Razao Social"/>
+                <input type="text" v-model="empresa.razao_social" id="razao_social" class="form-control" placeholder="Razao Social"/>
             </div>
           <div class="form-group col-md-6">
             <label for="nme_fantasia">Nome Fantasia :</label>
-            <input type="text" id="nme_fantasia" class="form-control" placeholder="Nome Fantasia"/>
+            <input type="text" id="nme_fantasia" v-model="empresa.nome_fantasia" class="form-control" placeholder="Nome Fantasia"/>
           </div>
           <div class="form-group col-md-3">
             <label for="cnpj">CNPJ :</label>
-            <input type="text" id="cnpj" class="form-control" placeholder="CNPJ"/>
+            <input type="text" id="cnpj" v-model="empresa.cnpj" class="form-control" placeholder="CNPJ"/>
           </div>
           <div class="form-group col-md-3">
             <label for="email">E-mail :</label>
-            <input type="email" id="email" class="form-control" placeholder="E-mail"/>
+            <input type="email" id="email" v-model="empresa.email" class="form-control" placeholder="E-mail"/>
           </div>
           <div class="form-group col-md-2">
             <label for="inscricao_estadual">Inscrição Estadual :</label>
-            <input type="number" min="0" id="inscricao_estadual" class="form-control" placeholder="Inscrição Estadual"/>
+            <input type="number" min="0" v-model="empresa.inscricao_estadual" id="inscricao_estadual" class="form-control" placeholder="Inscrição Estadual"/>
           </div>
           <div class="form-group col-md-2">
             <label for="situacao">Situação :</label>
-            <select id="situacao" class="form-control">
-                <option value="">Selecione</option>
+            <select id="situacao" v-model="empresa.situacao" class="form-control">
+                <option value="" disabled>Selecione</option>
                 <option value="ativa">Ativa</option>
                 <option value="inativa">Inativa</option>
             </select>
           </div>
           <div class="form-group col-md-2">
             <label for="capital_social">Capital Social :</label>
-            <input type="number" min="0" id="capital_social" class="form-control" placeholder="Capital Social"/>
+            <input type="number" min="0" v-model="empresa.capital_social" id="capital_social" class="form-control" placeholder="Capital Social"/>
           </div>
           <div class="form-group col-md-3">
             <label for="natureza_juridica">Natureza Juridica :</label>
-            <select id="natureza_juridica" class="form-control">
-              <option value="">Selecione</option>
+            <select id="natureza_juridica" v-model="empresa.natureza_juridica" class="form-control">
+              <option disabled value="">Selecione</option>
               <option value="sociedade_anonima">Sociedade anônima</option>
               <option value="sociedade_de_responsabilidade_limitada">Sociedade de responsabilidade limitada</option>
               <option value="sociedade_em_nome_coletivo">Sociedade em nome colectivo</option>
@@ -48,11 +49,11 @@
           </div>
           <div class="form-group col-md-3">
             <label for="telefone">Telefone :</label>
-            <input type="tel" id="telefone" class="form-control" placeholder="Telefone"/>
+            <input type="tel" id="telefone" v-model="empresa.telefone" class="form-control" placeholder="Telefone"/>
           </div>
           <div class="form-group col-md-6">
             <label for="ramo_atividade">Ramo Atividade :</label>
-            <input type="text" id="ramo_atividade" class="form-control" placeholder="Ramo Atividade"/>
+            <input type="text" id="ramo_atividade" v-model="empresa.ramo_atividade" class="form-control" placeholder="Ramo Atividade"/>
           </div>
         </div>
       <hr>
@@ -81,18 +82,22 @@
             />
           </div>
         </div>
-      </form>
+        <!-- usando componentes -->
+        <mensagem :mensagem="msg"></mensagem>
 
-      <!-- ccampo responsavel por receber o endereco -->
+      </form>
+      <br>
+        <!-- ccampo responsavel por receber o endereco -->
 
       <div class="form-row">
         <div class="form-group col-md-2">
           <label for="cep_recebido">Cep :</label>
           <input
-            type="number"
+            type="text"
             id="cep_recebido"
             disabled="disabled"
             class="form-control"
+            v-model="empresa.cep"
           />
         </div>
         <div class="form-group col-md-2">
@@ -102,6 +107,7 @@
             id="logradouro"
             disabled="disabled"
             class="form-control"
+            v-model="empresa.logradouro"
             placeholder
           />
         </div>
@@ -113,6 +119,7 @@
             disabled="disabled"
             class="form-control"
             placeholder
+            v-model="empresa.complemento"
           />
         </div>
 
@@ -123,17 +130,18 @@
             id="bairro"
             disabled="disabled"
             class="form-control"
+            v-model="empresa.bairro"
           />
         </div>
 
         <div class="form-group col-md-2">
           <label for="localidade">Localidade :</label>
           <input
-            type="number"
+            type="text"
             id="localidade"
             disabled="disabled"
-            name="numero_endereco"
             class="form-control"
+            v-model="empresa.localidade"
           />
         </div>
         <div class="form-group col-md-2">
@@ -143,6 +151,7 @@
             id="uf"
             disabled="disabled"
             class="form-control"
+            v-model="empresa.uf"
           />
         </div>
       </div>
@@ -166,17 +175,21 @@
   import Button from "../../components/button/Button.vue";
   import Login from "../Login";
   import CepService from "../../service/CepService";
+  import Empresas from "../../model/Empresas";
+  import Mensagem from "../../components/mensagem/Memsage.vue";
   export default {
     components:{
       Login,
       // utilizando os componentes
       MyButton: Button,
-      titulo: Titulo
+      titulo: Titulo,
+      mensagem: Mensagem
     },
     data() {
       return {
         cep: "",
-        msg: ""
+        msg: "",
+        empresa: new Empresas()
       };
     },
     methods:{
@@ -196,7 +209,7 @@
               // igual a true , ou cep invalido
               if (dados.erro !== true) {
                 //console.log(dados)
-                this.endereco = dados;
+                this.empresa = dados;
                 // limpa o campo de mensagem e o cep
                 this.msg = "";
                 this.cep = "";
