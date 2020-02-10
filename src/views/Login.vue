@@ -55,6 +55,7 @@
   import Button from "../components/button/Button.vue";
   import Titulo from "../components/titulo/Titulo.vue";
   import Usuarios from "../model/Usuarios";
+  import ServiceUsuarios from "../service/ServiceUsuarios";
   export default {
     // chamado o componete
     components: {
@@ -64,14 +65,38 @@
     },
     data(){
       return{
-        usuarios : new Usuarios()
+        usuarios : new Usuarios(),
+        users:[],
+        filtro:''
       }
     },
 
     methods:{
       realizarAcesso : function (event) {
-          console.log(this.usuarios)
+
+        console.log(this.filtro)
       },
+    },
+
+    computed:{
+
+        verificarDados(){
+            if (this.filtro){
+              let exp = new RegExp(this.filtro.trim(), 'i')
+              return this.users.filter(dados => exp.test(this.usuarios.email))
+              return []
+            }else {
+              return this.users
+            }
+        }
+    },
+
+    created() {
+      this.serviceUser = new ServiceUsuarios(this.$resource)
+      this.serviceUser.listar()
+      .then(dados => this.users = dados, err => {
+          console.log(err)
+      })
     }
   };
 </script>
