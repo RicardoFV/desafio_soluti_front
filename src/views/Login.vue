@@ -9,24 +9,25 @@
         <div class="text-center">
           <img class="mb-5" src="../assets/soluti-logo.jpg" alt="logo do sistema" />
         </div>
-        <form>
+        <form @submit.prevent="realizarAcesso">
           <div class="form-group">
-            <label for="exampleInputEmail1">E-mail</label>
+            <label for="email">E-mail</label>
             <input
               type="email"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              id="email"
               placeholder="Seu email"
+              v-model="usuarios.email"
             />
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Senha</label>
+            <label for="senha">Senha</label>
             <input
               type="password"
               class="form-control"
-              id="exampleInputPassword1"
+              id="senha"
               placeholder="Senha"
+              v-model="usuarios.senha"
             />
           </div>
           <div class="form-group col-sm-12 mb-4">
@@ -39,9 +40,7 @@
               class="badge badge-secondary col-auto float-right col-sm-6"
             >Esqueceu a senha</router-link>
           </div>
-          <router-link :to="{name:'home'}">
             <my-button tipo="submit" acao="Acessar" design="btn btn-success btn-block mt-4" />
-          </router-link>
         </form>
       </div>
       <div class="col-sm-3">
@@ -55,11 +54,24 @@
   // importando os componentes
   import Button from "../components/button/Button.vue";
   import Titulo from "../components/titulo/Titulo.vue";
+  import Usuarios from "../model/Usuarios";
   export default {
     // chamado o componete
     components: {
       MyButton: Button,
-      titulo: Titulo
+      titulo: Titulo,
+
+    },
+    data(){
+      return{
+        usuarios : new Usuarios()
+      }
+    },
+
+    methods:{
+      realizarAcesso : function (event) {
+          console.log(this.usuarios)
+      },
     }
   };
 </script>
