@@ -46,8 +46,8 @@
             aria-expanded="false"
           >Configuraçoes</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link class="dropdown-item" to>Alterar Dados</router-link>
-            <router-link class="dropdown-item" to>Alterar Senha</router-link>
+            <router-link class="dropdown-item"to="">Alterar Dados</router-link>
+            <router-link class="dropdown-item" to="" :click="autenticacao.alterarDados()">Alterar Senha</router-link>
           </div>
         </li>
         <li class="nav-item">
@@ -59,13 +59,12 @@
 </template>
 
 <script>
+  import Autenticacao from "../../acessos/Autenticacao";
 export default {
-  // Cria os atributos para uso do menu
-  props: {
-    rotas: {
-      type: Array,
-      required: true
-    }
+  data(){
+      return{
+        autenticacao : new Autenticacao()
+      }
   },
   computed: {
     // Verifica se a tela usada é a login, se for nao aparece menu

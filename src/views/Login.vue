@@ -75,7 +75,7 @@
       // verifica os dados que estão vindo do formulario
       verificarDados(){
         // se o que ele retornar for true , ele autentica
-          if(this.autenticacao.realizarLogin(this.usuarios.email, this.usuarios.senha, this.users) == true){
+          if(this.autenticacao.realizarLogin(this.usuarios.email, this.usuarios.senha, this.users) === true){
             this.$router.push({name :'home'})
           }
       },
