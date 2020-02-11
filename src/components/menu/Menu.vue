@@ -46,8 +46,8 @@
             aria-expanded="false"
           >Configuraçoes</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link class="dropdown-item"to="">Alterar Dados</router-link>
-            <router-link class="dropdown-item" to="" :click="autenticacao.alterarDados()">Alterar Senha</router-link>
+            <router-link class="dropdown-item"to="/usuarioalterar">Alterar Dados</router-link>
+            <router-link class="dropdown-item" to="" v-on:click="alterar">Alterar Senha</router-link>
           </div>
         </li>
         <li class="nav-item">
@@ -59,11 +59,17 @@
 </template>
 
 <script>
-  import Autenticacao from "../../acessos/Autenticacao";
+  import Usuarios from "../../model/Usuarios";
 export default {
   data(){
       return{
-        autenticacao : new Autenticacao()
+        usuarios : Usuarios
+      }
+  },
+
+  methods:{
+      alterar(){
+        this.usuarios.id
       }
   },
   computed: {
