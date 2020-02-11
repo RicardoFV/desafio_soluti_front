@@ -9,7 +9,7 @@
         <div class="text-center">
           <img class="mb-5" src="../assets/soluti-logo.jpg" alt="logo do sistema" />
         </div>
-        <form @submit.prevent="verificarDados()">
+        <form @submit.prevent="verificarDados">
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
@@ -56,6 +56,7 @@
   import Titulo from "../components/titulo/Titulo.vue";
   import Usuarios from "../model/Usuarios";
   import ServiceUsuarios from "../service/ServiceUsuarios";
+  import Autenticacao from "../acessos/Autenticacao";
 
   export default {
     // chamado o componete
@@ -71,24 +72,17 @@
       }
     },
     methods:{
-      // verifica os dados digitaods , com os que estao no banco de dados
+      // verifica os dados que estão vindo do formulario
       verificarDados(){
-          // percorre o array verificando os dados do banco
-          for(var i =0; i< this.users.length; i++){
-              if (this.usuarios.email == this.users[i].email &&  this.usuarios.senha == this.users[i].senha){
-                alert('existe')
-                // direciona para a home
-                this.$router.push({name :'home'})
-                break
-              }else{
-                alert('nao existe')
-                break
-              }
+        // se o que ele retornar for true , ele autentica
+          if(this.autenticacao.realizarLogin(this.usuarios.email, this.usuarios.senha, this.users) == true){
+            this.$router.push({name :'home'})
           }
       },
     },
-    
+
     created() {
+      this.autenticacao = new Autenticacao()
       this.serviceUser = new ServiceUsuarios(this.$resource)
       this.serviceUser.listar()
       .then(dados => this.users = dados, err => {
