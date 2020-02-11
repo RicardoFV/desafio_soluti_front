@@ -27,7 +27,9 @@
             aria-expanded="false"
           >Cadastros</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <router-link class="dropdown-item" to="/administradores">Administradores</router-link>
             <router-link class="dropdown-item" to="/empresas">Empresas</router-link>
+            <router-link class="dropdown-item" to="/contratos">Contratos</router-link>
             <router-link class="dropdown-item" to="/usuarios">Usuários</router-link>
           </div>
         </li>
