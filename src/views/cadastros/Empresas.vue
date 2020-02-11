@@ -1,64 +1,9 @@
 <template>
   <div class="container">
     <titulo estilo="text-center mt-1 mb-1" titulo="Nova Empresa"></titulo>
-    <form>
-        <div class="form-row">
-          <!-- formulario que cadastra os princiapis dados da empresa -->
-            <div class="form-group col-md-6">
-                <label for="razao_social">Razão Social :</label>
-                <input type="text" v-model="empresa.razao_social" id="razao_social" class="form-control" placeholder="Razao Social"/>
-            </div>
-          <div class="form-group col-md-6">
-            <label for="nme_fantasia">Nome Fantasia :</label>
-            <input type="text" id="nme_fantasia" v-model="empresa.nome_fantasia" class="form-control" placeholder="Nome Fantasia"/>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="cnpj">CNPJ :</label>
-            <input type="text" id="cnpj" v-model="empresa.cnpj" class="form-control" placeholder="CNPJ"/>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="email">E-mail :</label>
-            <input type="email" id="email" v-model="empresa.email" class="form-control" placeholder="E-mail"/>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="inscricao_estadual">Inscrição Estadual :</label>
-            <input type="number" min="0" v-model="empresa.inscricao_estadual" id="inscricao_estadual" class="form-control" placeholder="Inscrição Estadual"/>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="situacao">Situação :</label>
-            <select id="situacao" v-model="empresa.situacao" class="form-control">
-                <option value="" disabled>Selecione</option>
-                <option value="ativa">Ativa</option>
-                <option value="inativa">Inativa</option>
-            </select>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="capital_social">Capital Social :</label>
-            <input type="number" min="0" v-model="empresa.capital_social" id="capital_social" class="form-control" placeholder="Capital Social"/>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="natureza_juridica">Natureza Juridica :</label>
-            <select id="natureza_juridica" v-model="empresa.natureza_juridica" class="form-control">
-              <option disabled value="">Selecione</option>
-              <option value="sociedade_anonima">Sociedade anônima</option>
-              <option value="sociedade_de_responsabilidade_limitada">Sociedade de responsabilidade limitada</option>
-              <option value="sociedade_em_nome_coletivo">Sociedade em nome colectivo</option>
-              <option value="sociedade_em_comandita_simples">Sociedade em comandita simples</option>
-              <option value="sociedade_em_comandita_por_acoes">Sociedade em comandita por ações</option>
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="telefone">Telefone :</label>
-            <input type="tel" id="telefone" v-model="empresa.telefone" class="form-control" placeholder="Telefone"/>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="ramo_atividade">Ramo Atividade :</label>
-            <input type="text" id="ramo_atividade" v-model="empresa.ramo_atividade" class="form-control" placeholder="Ramo Atividade"/>
-          </div>
-        </div>
-      <hr>
-      <!-- configuraçao de endereço -->
-      <form @submit.prevent="pequisarCep" action>
+
+    <form @submit.prevent="salvarDados()">
+
         <!-- formulario de pesquisa do CEP-->
         <div class="form-row">
           <div class="form-group col-auto">
@@ -71,24 +16,27 @@
               class="form-control mr-1"
               v-model="cep"
               placeholder="Digite o seu CEP"
+              v-on:blur="pequisarCep"
             />
           </div>
           <div class="col-4 pt-2 mt-4">
+            <!--
             <my-button
               tipo="submit"
               acao="Pesquisar"
               id="bt_consultar_endereco"
               design="btn btn-primary ml-1"
             />
+            -->
           </div>
         </div>
         <!-- usando componentes -->
         <mensagem :mensagem="msg"></mensagem>
 
-      </form>
-      <br>
-        <!-- ccampo responsavel por receber o endereco -->
+      <hr>
 
+      <!-- ccampo responsavel por receber o endereco -->
+      <!-- configuraçao de endereço -->
       <div class="form-row">
         <div class="form-group col-md-2">
           <label for="cep_recebido">Cep :</label>
@@ -156,6 +104,61 @@
         </div>
       </div>
 
+      <!-- parte de cadastro de empresa  -->
+
+        <div class="form-row">
+          <!-- formulario que cadastra os princiapis dados da empresa -->
+            <div class="form-group col-md-6">
+                <label for="razao_social">Razão Social :</label>
+                <input type="text" v-model="empresa.razao_social" id="razao_social" class="form-control" placeholder="Razao Social"/>
+            </div>
+          <div class="form-group col-md-6">
+            <label for="nme_fantasia">Nome Fantasia :</label>
+            <input type="text" id="nme_fantasia" v-model="empresa.nome_fantasia" class="form-control" placeholder="Nome Fantasia"/>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="cnpj">CNPJ :</label>
+            <input type="text" id="cnpj" v-model="empresa.cnpj" class="form-control" placeholder="CNPJ"/>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" v-model="empresa.email" class="form-control" placeholder="E-mail"/>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inscricao_estadual">Inscrição Estadual :</label>
+            <input type="number" min="0" v-model="empresa.inscricao_estadual" id="inscricao_estadual" class="form-control" placeholder="Inscrição Estadual"/>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="situacao">Situação :</label>
+            <select id="situacao" v-model="empresa.situacao" class="form-control">
+                <option value="ativa">Ativa</option>
+                <option value="inativa">Inativa</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="capital_social">Capital Social :</label>
+            <input type="number" min="0" v-model="empresa.capital_social" id="capital_social" class="form-control" placeholder="Capital Social"/>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="natureza_juridica">Natureza Juridica :</label>
+            <select id="natureza_juridica" v-model="empresa.natureza_juridica" class="form-control">
+              <option value="sociedade_anonima">Sociedade anônima</option>
+              <option value="sociedade_de_responsabilidade_limitada">Sociedade de responsabilidade limitada</option>
+              <option value="sociedade_em_nome_coletivo">Sociedade em nome colectivo</option>
+              <option value="sociedade_em_comandita_simples">Sociedade em comandita simples</option>
+              <option value="sociedade_em_comandita_por_acoes">Sociedade em comandita por ações</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="telefone">Telefone :</label>
+            <input type="tel" id="telefone" v-model="empresa.telefone" class="form-control" placeholder="Telefone"/>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="ramo_atividade">Ramo Atividade :</label>
+            <input type="text" id="ramo_atividade" v-model="empresa.ramo_atividade" class="form-control" placeholder="Ramo Atividade"/>
+          </div>
+        </div>
+        <br>
       <!-- botao de envio -->
       <div class="form-row">
         <div class="col-6 mt-md-1">
@@ -188,12 +191,14 @@
     data() {
       return {
         cep: "",
-        msg: "",
-        empresa: new Empresas()
+        msg: ""
       };
     },
     methods:{
-      pequisarCep: function(evento) {
+      salvarDados(){
+            console.log(this.empresa)
+      },
+      pequisarCep(){
         // se caso o digito seja menor que 8
         if (this.cep.length < 8) {
           this.msg = "É necessário digitar todos os caracteres";
@@ -223,6 +228,10 @@
           );
         }
       }
+    },
+
+    created() {
+      this.empresa = new Empresas()
     }
 
   }
