@@ -9,7 +9,7 @@
         <div class="text-center">
           <img class="mb-5" src="../assets/soluti-logo.jpg" alt="logo do sistema" />
         </div>
-        <form @submit.prevent="realizarAcesso">
+        <form @submit.prevent="verificarDados()">
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
@@ -56,6 +56,7 @@
   import Titulo from "../components/titulo/Titulo.vue";
   import Usuarios from "../model/Usuarios";
   import ServiceUsuarios from "../service/ServiceUsuarios";
+
   export default {
     // chamado o componete
     components: {
@@ -66,31 +67,27 @@
     data(){
       return{
         usuarios : new Usuarios(),
-        users:[],
-        filtro:''
+        users:[]
       }
     },
-
     methods:{
-      realizarAcesso : function (event) {
-
-        console.log(this.filtro)
+      // verifica os dados digitaods , com os que estao no banco de dados
+      verificarDados(){
+          // percorre o array verificando os dados do banco
+          for(var i =0; i< this.users.length; i++){
+              if (this.usuarios.email == this.users[i].email &&  this.usuarios.senha == this.users[i].senha){
+                alert('existe')
+                // direciona para a home
+                this.$router.push({name :'home'})
+                break
+              }else{
+                alert('nao existe')
+                break
+              }
+          }
       },
     },
-
-    computed:{
-
-        verificarDados(){
-            if (this.filtro){
-              let exp = new RegExp(this.filtro.trim(), 'i')
-              return this.users.filter(dados => exp.test(this.usuarios.email))
-              return []
-            }else {
-              return this.users
-            }
-        }
-    },
-
+    
     created() {
       this.serviceUser = new ServiceUsuarios(this.$resource)
       this.serviceUser.listar()
