@@ -46,11 +46,11 @@
             aria-expanded="false"
           >Configuraçoes</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link class="dropdown-item"to="/usuarioalterar">Alterar Dados</router-link>
+          <router-link id="altear_usuario" class="dropdown-item"to="/usuarioalterar">Alterar Dados</router-link>
           </div>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" v-if="sair" to="/sair">Sair</router-link>
+          <router-link class="nav-link" @click="sair" to="/sair">Sair</router-link>
         </li>
       </ul>
     </div>
@@ -66,6 +66,7 @@ export default {
 
       }
   },
+
 
   methods:{
     sair(){

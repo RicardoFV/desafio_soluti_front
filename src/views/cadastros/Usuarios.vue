@@ -31,7 +31,7 @@
             <my-button tipo="submit" acao="Cadastrar" id="bt_salvar" design="btn btn-block btn-success" />
           </div>
           <div class="col-6 mt-md-1">
-            <router-link class="btn btn-block btn-success" to="/">Cancelar</router-link>
+            <router-link class="btn btn-block btn-success" to="/home">Cancelar</router-link>
           </div>
         </div>
       </form>

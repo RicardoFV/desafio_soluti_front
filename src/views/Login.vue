@@ -9,7 +9,7 @@
         <div class="text-center">
           <img class="mb-5" src="../assets/soluti-logo.jpg" alt="logo do sistema" />
         </div>
-        <form @submit.prevent="logar">
+        <form @submit.prevent="logar()">
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
@@ -61,8 +61,7 @@
     // chamado o componete
     components: {
       MyButton: Button,
-      titulo: Titulo,
-
+      "titulo": Titulo
     },
     data(){
       return{
@@ -73,11 +72,11 @@
     methods:{
       // verifica os dados que estão vindo do formulario
       logar(){
-           for (let i = 0; i < this.users.length; i++){
+           for (let i = 0; i <= this.users.length; i++){
              if (this.users[i].email == this.usuarios.email  && this.users[i].senha == (calcMD5(this.usuarios.senha))){
                alert(' Aceito ' + this.users[i].id)
                this.$router.push('home')
-               sessionStorage.setItem('id_usuario' ,JSON.stringify(this.users[i]))
+               sessionStorage.setItem('id_usuario',this.users[i].id)
                break
              }else{
              //  alert('nao tem')

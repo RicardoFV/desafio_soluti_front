@@ -59,17 +59,22 @@
         id:this.$route.params.id
       }
     },
+    computed:{
+
+    },
     methods:{
-      alterarDados : function (event) {
-         this.usuarios.id =  window.sessionStorage.getItem('id_usuario')
-          console.log(this.usuarios)
+      alterarDados() {
+         this.serviceUser.atualizar(this.usuarios)
+         .then(()=>{
+           this.usuarios = new Usuarios()
+           this.$router.push('home')
+         })
       },
     },
     created() {
-
+      // instancia o meu serviço usuario atraves do id salvo na session
       this.serviceUser = new ServiceUsuarios(this.$resource)
-        this.serviceUser.consultarPorId(this.id).then(user => this.usuarios = user)
-
+        this.serviceUser.consultarPorId(sessionStorage.getItem('id_usuario')).then(user => this.usuarios = user)
     },
   }
 </script>
