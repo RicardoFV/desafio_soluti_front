@@ -176,13 +176,12 @@
   // importando os componentes para uso
   import Titulo from "../../components/titulo/Titulo.vue";
   import Button from "../../components/button/Button.vue";
-  import Login from "../Login";
+  //import Login from "../Login";
   import CepService from "../../service/CepService";
   import Empresas from "../../model/Empresas";
   import Mensagem from "../../components/mensagem/Memsage.vue";
   export default {
     components:{
-      Login,
       // utilizando os componentes
       MyButton: Button,
       titulo: Titulo,

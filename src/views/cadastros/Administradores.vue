@@ -11,8 +11,11 @@
         <div class="form-group col-md-6">
           <label for="tipo">Tipo :</label>
           <select id="tipo"  class="form-control">
-            <option value="ativa">Ativa</option>
-            <option value="inativa">Inativa</option>
+            <option value="socio">Sócio</option>
+            <option value="administrador">Administrador</option>
+            <option value="responsave_legal">Responsável Legal</option>
+            <option value="cotista">Cotista</option>
+
           </select>
         </div>
       </div>

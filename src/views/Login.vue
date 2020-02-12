@@ -9,7 +9,7 @@
         <div class="text-center">
           <img class="mb-5" src="../assets/soluti-logo.jpg" alt="logo do sistema" />
         </div>
-        <form @submit.prevent="logar()">
+        <form @submit.prevent="logar">
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
@@ -36,7 +36,7 @@
               class="badge badge-secondary col-auto float-right col-sm-6 ml-1"
             >Novo Cadastro</router-link>
             <router-link
-              to
+              to=""
               class="badge badge-secondary col-auto float-right col-sm-6"
             >Esqueceu a senha</router-link>
           </div>
@@ -61,7 +61,7 @@
     // chamado o componete
     components: {
       MyButton: Button,
-      "titulo": Titulo
+      titulo: Titulo,
     },
     data(){
       return{
@@ -81,13 +81,12 @@
              }else{
              //  alert('nao tem')
              }
-
-           }
+      }
 
       },
     },
 
-    created() {
+    created(){
 
       this.serviceUser = new ServiceUsuarios(this.$resource)
       this.serviceUser.listar()

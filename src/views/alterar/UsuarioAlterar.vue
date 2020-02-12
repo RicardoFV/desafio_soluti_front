@@ -6,13 +6,13 @@
         <input type="hidden" v-model="usuarios.id" />
         <div class="form-group col-md-6">
           <label for="nome_completo">Nome Completo :</label>
-          <input type="text" v-model="usuarios.nome_completo" id="nome_completo" class="form-control" placeholder="Digite seu nome"/>
+          <input type="text" v-model="usuarios.nome_completo" class="form-control" placeholder="Digite seu nome"/>
           <!-- usando componentes -->
           <mensagem :mensagem="msg"></mensagem>
         </div>
         <div class="form-group col-md-6">
           <label for="email">E-mail :</label>
-          <input type="email" id="email" v-model="usuarios.email" class="form-control" placeholder="Digite seu E-mail"/>
+          <input type="email"  v-model="usuarios.email" class="form-control" placeholder="Digite seu E-mail"/>
           <!-- usando componentes -->
           <mensagem :mensagem="msg"></mensagem>
         </div>
@@ -32,7 +32,7 @@
           <my-button tipo="submit" acao="Alterar" id="bt_salvar" design="btn btn-block btn-success" />
         </div>
         <div class="col-6 mt-md-1">
-          <router-link class="btn btn-block btn-success" to="/">Cancelar</router-link>
+          <router-link class="btn btn-block btn-success" to="/home">Cancelar</router-link>
         </div>
       </div>
     </form>
@@ -65,7 +65,7 @@
     methods:{
       alterarDados() {
          this.serviceUser.atualizar(this.usuarios)
-         .then(()=>{
+         .then(() =>{
            this.usuarios = new Usuarios()
            this.$router.push('home')
          })
