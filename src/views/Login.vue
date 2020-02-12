@@ -9,7 +9,7 @@
         <div class="text-center">
           <img class="mb-5" src="../assets/soluti-logo.jpg" alt="logo do sistema" />
         </div>
-        <form @submit.prevent="verificarDados">
+        <form @submit.prevent="logar">
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
@@ -56,7 +56,6 @@
   import Titulo from "../components/titulo/Titulo.vue";
   import Usuarios from "../model/Usuarios";
   import ServiceUsuarios from "../service/ServiceUsuarios";
-  import Autenticacao from "../acessos/Autenticacao";
 
   export default {
     // chamado o componete
@@ -73,16 +72,24 @@
     },
     methods:{
       // verifica os dados que estão vindo do formulario
-      verificarDados(){
-        // se o que ele retornar for true , ele autentica
-          if(this.autenticacao.realizarLogin(this.usuarios.email, this.usuarios.senha, this.users) === true){
-            this.$router.push({name :'home'})
-          }
+      logar(){
+           for (let i = 0; i < this.users.length; i++){
+             if (this.users[i].email == this.usuarios.email  && this.users[i].senha == (calcMD5(this.usuarios.senha))){
+               alert(' Aceito ' + this.users[i].id)
+               this.$router.push('home')
+               sessionStorage.setItem('id_usuario' ,JSON.stringify(this.users[i]))
+               break
+             }else{
+             //  alert('nao tem')
+             }
+
+           }
+
       },
     },
 
     created() {
-      this.autenticacao = new Autenticacao()
+
       this.serviceUser = new ServiceUsuarios(this.$resource)
       this.serviceUser.listar()
       .then(dados => this.users = dados, err => {

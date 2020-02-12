@@ -47,11 +47,10 @@
           >Configuraçoes</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <router-link class="dropdown-item"to="/usuarioalterar">Alterar Dados</router-link>
-            <router-link class="dropdown-item" to="" v-on:click="alterar">Alterar Senha</router-link>
           </div>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/">Sair</router-link>
+          <router-link class="nav-link" v-if="sair" to="/sair">Sair</router-link>
         </li>
       </ul>
     </div>
@@ -59,24 +58,31 @@
 </template>
 
 <script>
-  import Usuarios from "../../model/Usuarios";
+
+
 export default {
   data(){
       return{
-        usuarios : Usuarios
+
       }
   },
 
   methods:{
-      alterar(){
-        this.usuarios.id
+    sair(){
+      if(this.$route.path === '/sair'){
+        sessionStorage.removeItem('id_usuario')
+        sessionStorage.clear()
+        this.$router.push('login')
       }
+    }
   },
   computed: {
     // Verifica se a tela usada é a login, se for nao aparece menu
     isLoginRoute() {
       return this.$route.path !== "/";
-    }
+    },
+
+
   }
 };
 </script>

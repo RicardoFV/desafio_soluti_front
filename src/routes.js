@@ -55,6 +55,13 @@ export const routes =[{
     component:UsuarioAlterar,
     titulo: 'UsuarioAlterar',
     menu:true
+  },
+  {
+    path:'/sair',
+    name:'sair',
+    component:Login,
+    titulo:'Sair',
+    menu:true
   }
 
 ]
