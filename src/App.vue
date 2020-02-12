@@ -13,7 +13,7 @@
   import Menu from '../src/components/menu/Menu.vue'
 export default {
     components:{
-      "menu-principal" :Menu
+      menuPrincipal :Menu
     },
   data() {
     return {

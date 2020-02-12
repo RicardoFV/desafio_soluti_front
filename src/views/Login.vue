@@ -9,7 +9,7 @@
         <div class="text-center">
           <img class="mb-5" src="../assets/soluti-logo.jpg" alt="logo do sistema" />
         </div>
-        <form @submit.prevent="logar">
+        <form @submit.prevent="logar()">
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
@@ -35,10 +35,7 @@
               to="/usuarios"
               class="badge badge-secondary col-auto float-right col-sm-6 ml-1"
             >Novo Cadastro</router-link>
-            <router-link
-              to=""
-              class="badge badge-secondary col-auto float-right col-sm-6"
-            >Esqueceu a senha</router-link>
+            <router-link class="badge badge-secondary col-auto float-right col-sm-6" to="/">Esqueceu a senha</router-link>
           </div>
             <my-button tipo="submit" acao="Acessar" design="btn btn-success btn-block mt-4" />
         </form>
@@ -65,29 +62,29 @@
     },
     data(){
       return{
-        usuarios : new Usuarios(),
+        //usuarios : new Usuarios(),
         users:[]
       }
     },
     methods:{
       // verifica os dados que estão vindo do formulario
       logar(){
+            var mySenha = calcMD5(this.usuarios.senha)
            for (let i = 0; i <= this.users.length; i++){
-             if (this.users[i].email == this.usuarios.email  && this.users[i].senha == (calcMD5(this.usuarios.senha))){
+             if (this.usuarios.email == this.users[i].email  && mySenha === this.users[i].senha || this.usuarios.email.valueOf() == this.users[i].email){
                alert(' Aceito ' + this.users[i].id)
-               this.$router.push('home')
+                this.$router.push('home')
                sessionStorage.setItem('id_usuario',this.users[i].id)
                break
              }else{
-             //  alert('nao tem')
+              alert('nao tem')
              }
-      }
-
+        }
       },
     },
 
     created(){
-
+      this.usuarios = new Usuarios()
       this.serviceUser = new ServiceUsuarios(this.$resource)
       this.serviceUser.listar()
       .then(dados => this.users = dados, err => {
