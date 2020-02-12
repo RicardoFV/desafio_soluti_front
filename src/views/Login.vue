@@ -84,6 +84,8 @@
     },
 
     created(){
+      sessionStorage.removeItem("id_usuario")
+      sessionStorage.clear()
       this.usuarios = new Usuarios()
       this.serviceUser = new ServiceUsuarios(this.$resource)
       this.serviceUser.listar()

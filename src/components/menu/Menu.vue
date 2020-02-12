@@ -50,7 +50,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" @click="sair" to="/sair">Sair</router-link>
+          <router-link class="btn default" v-on:click="sair" to="/sair">Sair</router-link>
         </li>
       </ul>
     </div>
@@ -60,7 +60,9 @@
 <script>
 
 
+import Button from "../button/Button";
 export default {
+  components: {Button},
   data(){
       return{
 
@@ -70,21 +72,18 @@ export default {
 
   methods:{
     sair(){
-      if(this.$route.path === '/sair'){
-        sessionStorage.removeItem('id_usuario')
-        sessionStorage.clear()
-        this.$router.push('login')
-      }
+
+      this.$router.push("/login")
+
     }
   },
   computed: {
     // Verifica se a tela usada é a login, se for nao aparece menu
     isLoginRoute() {
-      return this.$route.path !== "/";
-    },
+        return this.$route.path !== "/" && this.$route.path !== "/sair";
+      }
 
-
-  }
+  },
 };
 </script>
 

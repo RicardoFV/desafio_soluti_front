@@ -63,10 +63,19 @@
 
     },
     methods:{
+      // metodo que altera as informaçoes do usuario
       alterarDados() {
+
+        if($('#nome_completo').val() ==''){
+          this.msg = "Nome não pode ser vazio"
+        }else if($('#email').val() == ''){
+          this.msg = "E-mail não pode ser vazio"
+        }
          this.serviceUser.atualizar(this.usuarios)
          .then(() =>{
            this.usuarios = new Usuarios()
+           $('#repetir_senha').val('')
+           alert("Usuário Alterado com Sucesso !")
            this.$router.push('home')
          })
       },
