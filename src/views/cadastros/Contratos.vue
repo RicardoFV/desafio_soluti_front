@@ -3,21 +3,28 @@
   <div class="container">
     <titulo estilo="text-center mt-1 mb-1" titulo="Novo Contrato"></titulo>
 
-    <form>
+    <form @submit.prevent="salvarDados" enctype="multipart/form-data">
       <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
           <label for="nome">Nome :</label>
-          <input id="nome" class="form-control" placeholder="Nome contrato"/>
+          <input type="text" v-model="contratos.nome" id="nome" class="form-control" placeholder="Nome Contrato"/>
         </div>
-        <div class="form-group col-md-4">
-          <label for="empresa">Empresa :</label>
-          <select id="empresa" class="form-control">
-
+        <div class="form-group col-md-3">
+          <label for="situacao">Situação :</label>
+          <select id="situacao" v-model="contratos.situacao" class="form-control">
+              <option value="aprovado">Aprovado</option>
+              <option value="reprovado">Reprovado</option>
           </select>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
+          <label for="empresa">Empresa :</label>
+          <select id="empresa"v-model="contratos.id_empresa"  class="form-control">
+            <option v-for="d of dados">{{d.razao_social}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
           <label for="arquivo">Contrato :</label>
-            <input type="file" class="form-control-file" id="arquivo">
+            <input type="file" class="form-control-file"  id="arquivo">
         </div>
       </div>
       <!-- botao de envio -->
@@ -41,12 +48,38 @@
   import Titulo from "../../components/titulo/Titulo.vue";
   import Button from "../../components/button/Button.vue";
   import Mensagem from "../../components/mensagem/Memsage.vue";
+  import Contratos from "../../model/Contratos";
+  import ServiceContratos from "../../service/ServiceContratos";
+  import ServiceEmpresa from "../../service/ServiceEmpresa";
   export default {
     components:{
       // utilizando os componentes
       MyButton: Button,
       titulo: Titulo,
-      mensagem: Mensagem
+      mensagem: Mensagem,
+    },
+
+    data(){
+      return{
+        contratos:new Contratos(),
+        dados :[]
+      }
+    },
+
+    methods:{
+          salvarDados(){
+            console.log(this.contratos)
+          }
+    },
+
+    created() {
+      this.serviceEmpresa = new ServiceEmpresa(this.$resource)
+      this.serviceEmpresa.listar()
+      .then(d => this.dados = d, err =>{
+         err.message()
+      })
+
+      this.sericeContratos = new ServiceContratos(this.$resource)
     }
 
   }

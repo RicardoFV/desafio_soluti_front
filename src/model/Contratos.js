@@ -1,9 +1,10 @@
 // classe contratos
 export default class Contratos {
 
-  constructor(id , caminho_arquivo, situacao, data_anexo, id_empresa)
+  constructor(id ,nome, caminho_arquivo, situacao, data_anexo, id_empresa)
   {
     this.id = id;
+    this.nome = nome
     this.caminho_arquivo = caminho_arquivo;
     this.situacao = situacao;
     this.data_anexo = data_anexo;

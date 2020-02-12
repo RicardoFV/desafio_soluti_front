@@ -6,11 +6,11 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
-          <input id="nome" class="form-control" placeholder="Nome Administrador"/>
+          <input id="nome" class="form-control" v-model="administradores.nome" placeholder="Nome Administrador"/>
         </div>
         <div class="form-group col-md-4">
           <label for="tipo">Tipo :</label>
-          <select id="tipo"  class="form-control">
+          <select id="tipo" v-model="administradores.tipo"  class="form-control">
             <option value="socio">Sócio</option>
             <option value="administrador">Administrador</option>
             <option value="responsave_legal">Responsável Legal</option>
@@ -19,8 +19,8 @@
         </div>
         <div class="form-group col-md-4">
           <label for="contrato">Contrato :</label>
-          <select id="contrato" class="form-control">
-
+          <select id="contrato" v-model="administradores.id_contrato" class="form-control">
+                <option v-for="d of dados">{{d.nome}}</option>
           </select>
         </div>
       </div>
@@ -43,12 +43,33 @@
   import Titulo from "../../components/titulo/Titulo.vue";
   import Button from "../../components/button/Button.vue";
   import Mensagem from "../../components/mensagem/Memsage.vue";
+  import Administradores from "../../model/Administradores";
+  import ServiceAdministradores from "../../service/ServiceAdministradores";
+  import ServiceContratos from "../../service/ServiceContratos";
   export default {
     components:{
       // utilizando os componentes
       MyButton: Button,
       titulo: Titulo,
       mensagem: Mensagem
+    },
+    data(){
+      return{
+        dados:[]
+      }
+    },
+    methods:{
+
+    },
+    created() {
+      this.administradores = new Administradores()
+      this.serviceAdministradores = new ServiceAdministradores(this.$resource)
+      this.serviceContratos = new ServiceContratos(this.$resource)
+
+      this.serviceContratos.listar()
+      .then(d => this.dados = d, err =>{
+        err.message()
+      })
     }
   }
 
