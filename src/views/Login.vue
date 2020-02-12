@@ -69,17 +69,27 @@
     methods:{
       // verifica os dados que estão vindo do formulario
       logar(){
-            var mySenha = calcMD5(this.usuarios.senha)
-           for (let i = 0; i <= this.users.length; i++){
-             if (this.usuarios.email == this.users[i].email  && mySenha === this.users[i].senha || this.usuarios.email.valueOf() == this.users[i].email){
-               alert(' Aceito ' + this.users[i].id)
-                this.$router.push('home')
-               sessionStorage.setItem('id_usuario',this.users[i].id)
-               break
-             }else{
-              alert('nao tem')
-             }
+            if (document.getElementById('email').value == ''){
+               alert("É necessario preencher o E-mail")
+
+            }if (document.getElementById('senha').value == ''){
+              alert("É necessario preencher a Senha")
+
+            }else{
+          // var mySenha = calcMD5(this.usuarios.senha)
+          for (let i = 0; i <= this.users.length; i++){
+            if (this.usuarios.email == this.users[i].email  && calcMD5(this.usuarios.senha) == this.users[i].senha || this.usuarios.email.valueOf() == this.users[i].email){
+              //alert(' Aceito ' + this.users[i].id)
+              this.$router.push('home')
+              sessionStorage.setItem('id_usuario',this.users[i].id)
+              break
+            }else{
+              alert('Usuário e/ou senha incorretos')
+
+            }
+          }
         }
+
       },
     },
 

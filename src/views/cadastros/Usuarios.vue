@@ -58,6 +58,7 @@
       }
     },
     methods:{
+      // metodo que salva as informações
       salvarDados : function (event) {
           if($('#senha').val() != $('#repetir_senha').val() ){
             this.msg = "As senhas nao conferem"
@@ -72,6 +73,14 @@
           alert("Usuário salvo com sucesso !")
           $('#repetir_senha').val('')
           this.usuarios = new Usuarios();
+          // caso tenha sessão , ou seja , cadastrado, ele direciona para a tela de login,
+          // senão ele vai para a tela de autenticação
+          if (sessionStorage.getItem('id_usuario')){
+            this.$router.push('/home')
+          }else{
+            this.$router.push('/')
+          }
+
       },
     },
     created() {

@@ -4,17 +4,22 @@
 
     <form>
       <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
           <input id="nome" class="form-control" placeholder="Nome Administrador"/>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="tipo">Tipo :</label>
           <select id="tipo"  class="form-control">
             <option value="socio">Sócio</option>
             <option value="administrador">Administrador</option>
             <option value="responsave_legal">Responsável Legal</option>
             <option value="cotista">Cotista</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="contrato">Contrato :</label>
+          <select id="contrato" class="form-control">
 
           </select>
         </div>

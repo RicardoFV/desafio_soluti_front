@@ -107,6 +107,7 @@
       <!-- parte de cadastro de empresa  -->
 
         <div class="form-row">
+          <input type="hidden" v-model="empresa.id_usuario"/>
           <!-- formulario que cadastra os princiapis dados da empresa -->
             <div class="form-group col-md-6">
                 <label for="razao_social">Razão Social :</label>
@@ -180,6 +181,7 @@
   import CepService from "../../service/CepService";
   import Empresas from "../../model/Empresas";
   import Mensagem from "../../components/mensagem/Memsage.vue";
+  import ServiceEmpresa from "../../service/ServiceEmpresa";
   export default {
     components:{
       // utilizando os componentes
@@ -190,12 +192,19 @@
     data() {
       return {
         cep: "",
-        msg: ""
+        msg: "",
+        empresa :new Empresas()
       };
     },
     methods:{
       salvarDados(){
+            this.empresa.id_usuario = sessionStorage.getItem('id_usuario')
             console.log(this.empresa)
+            this.serviceEmpresa.inserir(this.empresa)
+            alert("Empresa Cadastrada Com Sucesso !")
+            this.$router.push('home')
+            this.empresa = new Empresas()
+
       },
       pequisarCep(){
         // se caso o digito seja menor que 8
@@ -230,7 +239,8 @@
     },
 
     created() {
-      this.empresa = new Empresas()
+      //this.empresa = new Empresas()
+      this.serviceEmpresa = new ServiceEmpresa(this.$resource);
     }
 
   }

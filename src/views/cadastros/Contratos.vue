@@ -5,11 +5,17 @@
 
     <form>
       <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
           <input id="nome" class="form-control" placeholder="Nome contrato"/>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
+          <label for="empresa">Empresa :</label>
+          <select id="empresa" class="form-control">
+
+          </select>
+        </div>
+        <div class="form-group col-md-4">
           <label for="arquivo">Contrato :</label>
             <input type="file" class="form-control-file" id="arquivo">
         </div>
