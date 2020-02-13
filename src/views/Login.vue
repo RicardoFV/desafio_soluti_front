@@ -76,15 +76,16 @@
               alert("É necessario preencher a Senha")
 
             }else{
-          // var mySenha = calcMD5(this.usuarios.senha)
+
+          // percorre o array de informaçoes
           for (let i = 0; i <= this.users.length; i++){
-            if (this.usuarios.email == this.users[i].email  && calcMD5(this.usuarios.senha) == this.users[i].senha || this.usuarios.email.valueOf() == this.users[i].email){
-              //alert(' Aceito ' + this.users[i].id)
+            let mySenha = calcMD5(this.usuarios.senha)
+
+            if ( this.users[i].email.indexOf(this.usuarios.email) === -1 && this.users[i].senha.indexOf(mySenha) === -1){
+              alert('Usuário e/ou senha incorretos')
+            }else{
               this.$router.push('home')
               sessionStorage.setItem('id_usuario',this.users[i].id)
-              break
-            }else{
-              alert('Usuário e/ou senha incorretos')
 
             }
           }
