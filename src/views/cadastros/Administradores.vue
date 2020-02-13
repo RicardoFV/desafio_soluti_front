@@ -20,7 +20,7 @@
         <div class="form-group col-md-4">
           <label for="contrato">Contrato :</label>
           <select id="contrato" v-model="administradores.id_contrato" class="form-control">
-                <option v-for="d of dados">{{d.nome}}</option>
+                <option v-for="d of dados" :value="d.id">{{d.id}}</option>
           </select>
         </div>
       </div>

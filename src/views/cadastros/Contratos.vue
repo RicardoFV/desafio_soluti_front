@@ -7,7 +7,16 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="nome">Nome :</label>
-          <input type="text" v-model="contratos.nome" id="nome" class="form-control" placeholder="Nome Contrato"/>
+          <select id="nome" v-model="contratos.nome" class="form-control">
+            <option value="contrato_social">Contrato social</option>
+            <option value="registro_junta">Registro na Junta Comercial</option>
+            <option value="cartao_cnpj">Cartão CNPJ</option>
+            <option value="inscricao-estadual">Inscrição estadual</option>
+            <option value="alvara_funcionamento">Alvará de funcionamento</option>
+            <option value="licenca_bombeiro">Licença dos bombeiros</option>
+            <option value="licenca_sanitaria">Licença da Vigilância Sanitária</option>
+            <option value="registro_previdencia">Registro na Previdência Social</option>
+          </select>
         </div>
         <div class="form-group col-md-3">
           <label for="situacao">Situação :</label>
@@ -19,12 +28,12 @@
         <div class="form-group col-md-3">
           <label for="empresa">Empresa :</label>
           <select id="empresa"v-model="contratos.id_empresa"  class="form-control">
-            <option v-for="d of dados">{{d.razao_social}}</option>
+            <option v-for="d of dados" :value="d.id">{{d.razao_social}}</option>
           </select>
         </div>
         <div class="form-group col-md-3">
           <label for="arquivo">Contrato :</label>
-            <input type="file" class="form-control-file"  id="arquivo">
+            <input type="file" @change="selecionarArquivo" class="form-control-file"  id="arquivo">
         </div>
       </div>
       <!-- botao de envio -->
@@ -62,13 +71,23 @@
     data(){
       return{
         contratos:new Contratos(),
-        dados :[]
+        dados :[],
+        // seleciona o arquivo
+        arquivoSelecionado:null
       }
     },
 
     methods:{
           salvarDados(){
+            const fd = new FormData()
+            fd.append('pdf',this.arquivoSelecionado, this.arquivoSelecionado.name)
+            this.contratos.caminho_arquivo = this.arquivoSelecionado;
             console.log(this.contratos)
+            this.serviceContratos.inserir(this.contratos)
+          },
+
+          selecionarArquivo(event){
+            this.arquivoSelecionado = event.target.files[0]
           }
     },
 
@@ -79,7 +98,7 @@
          err.message()
       })
 
-      this.sericeContratos = new ServiceContratos(this.$resource)
+      this.serviceContratos = new ServiceContratos(this.$resource)
     }
 
   }
