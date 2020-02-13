@@ -9,7 +9,7 @@ export default class ServiceAdministradores {
 
   // criaçao dos metodos de persistencia
   inserir(administradores) {
-    return this._resource.save(contratos)
+    return this._resource.save(administradores)
   }
   deletar(id) {
     return this._resource.delete({ id })
@@ -17,7 +17,7 @@ export default class ServiceAdministradores {
 
   listar() {
     return this._resource.query().then(resposta => resposta.json(), err => {
-      console.log(err)
+     // console.log(err)
     })
   }
   atualizar(administradores) {

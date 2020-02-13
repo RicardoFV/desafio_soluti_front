@@ -6,13 +6,13 @@
         <input type="hidden" v-model="usuarios.id" />
         <div class="form-group col-md-6">
           <label for="nome_completo">Nome Completo :</label>
-          <input type="text" v-model="usuarios.nome_completo" class="form-control" placeholder="Digite seu nome"/>
+          <input type="text" v-model="usuarios.nome_completo" class="form-control" id="nome_completo" placeholder="Digite seu nome"/>
           <!-- usando componentes -->
           <mensagem :mensagem="msg"></mensagem>
         </div>
         <div class="form-group col-md-6">
           <label for="email">E-mail :</label>
-          <input type="email"  v-model="usuarios.email" class="form-control" placeholder="Digite seu E-mail"/>
+          <input type="email"  v-model="usuarios.email" id="email" class="form-control" placeholder="Digite seu E-mail"/>
           <!-- usando componentes -->
           <mensagem :mensagem="msg"></mensagem>
         </div>
@@ -70,19 +70,24 @@
           this.msg = "Nome não pode ser vazio"
         }else if($('#email').val() == ''){
           this.msg = "E-mail não pode ser vazio"
+        }else if($('#repetir_senha').val() != $('#senha').val()) {
+          alert("As senhas nao conferem")
+        }else{
+          this.serviceUser.atualizar(this.usuarios)
+            .then(() =>{
+              this.usuarios = new Usuarios()
+              $('#repetir_senha').val('')
+              alert("Usuário Alterado com Sucesso !")
+              this.$router.push('home')
+            })
         }
-         this.serviceUser.atualizar(this.usuarios)
-         .then(() =>{
-           this.usuarios = new Usuarios()
-           $('#repetir_senha').val('')
-           alert("Usuário Alterado com Sucesso !")
-           this.$router.push('home')
-         })
+
       },
     },
     created() {
       // instancia o meu serviço usuario atraves do id salvo na session
       this.serviceUser = new ServiceUsuarios(this.$resource)
+      // faz a busca por id gravado na sessionStorage
         this.serviceUser.consultarPorId(sessionStorage.getItem('id_usuario')).then(user => this.usuarios = user)
     },
   }

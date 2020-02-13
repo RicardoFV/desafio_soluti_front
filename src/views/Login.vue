@@ -101,7 +101,7 @@
       this.serviceUser = new ServiceUsuarios(this.$resource)
       this.serviceUser.listar()
       .then(dados => this.users = dados, err => {
-          console.log(err)
+
       })
     }
   };

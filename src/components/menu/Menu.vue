@@ -50,7 +50,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <router-link class="btn default" v-on:click="sair" to="/sair">Sair</router-link>
+          <router-link class="btn btn-dark" v-on:click="sair" to="/sair">Sair</router-link>
         </li>
       </ul>
     </div>

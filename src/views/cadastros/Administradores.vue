@@ -2,7 +2,7 @@
   <div class="container">
     <titulo estilo="text-center mt-1 mb-1" titulo="Novo Administrador"></titulo>
 
-    <form>
+    <form @submit.prevent="salvarDados">
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
@@ -59,7 +59,16 @@
       }
     },
     methods:{
+          salvarDados(){
 
+                if (this.serviceAdministradores.inserir(this.administradores)){
+                  alert('Administador salvo com sucesso !')
+                  this.administradores = new Administradores()
+                  this.$router.push('/home')
+                }else {
+                  alert('Erro ao salvar Administrador')
+                }
+          }
     },
     created() {
       this.administradores = new Administradores()

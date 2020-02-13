@@ -5,7 +5,7 @@
 
     <form @submit.prevent="salvarDados" enctype="multipart/form-data">
       <div class="form-row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
           <select id="nome" v-model="contratos.nome" class="form-control">
             <option value="contrato_social">Contrato social</option>
@@ -18,23 +18,27 @@
             <option value="registro_previdencia">Registro na Previdência Social</option>
           </select>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label for="situacao">Situação :</label>
           <select id="situacao" v-model="contratos.situacao" class="form-control">
               <option value="aprovado">Aprovado</option>
               <option value="reprovado">Reprovado</option>
           </select>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
+
           <label for="empresa">Empresa :</label>
           <select id="empresa"v-model="contratos.id_empresa"  class="form-control">
             <option v-for="d of dados" :value="d.id">{{d.razao_social}}</option>
           </select>
         </div>
+        <!--
         <div class="form-group col-md-3">
-          <label for="arquivo">Contrato :</label>
-            <input type="file" @change="selecionarArquivo" class="form-control-file"  id="arquivo">
+          <label for="file">Contrato :</label>
+            <input type="file" @change="selecionarArquivo" class="form-control-file" id="file">
+
         </div>
+      -->
       </div>
       <!-- botao de envio -->
       <div class="form-row">
@@ -73,22 +77,33 @@
         contratos:new Contratos(),
         dados :[],
         // seleciona o arquivo
-        arquivoSelecionado:null
+        //arquivoSelecionado:null
       }
     },
 
     methods:{
           salvarDados(){
-            const fd = new FormData()
-            fd.append('pdf',this.arquivoSelecionado, this.arquivoSelecionado.name)
-            this.contratos.caminho_arquivo = fd;
+            //const fd = new FormData()
+            //fd.append('pdf',this.arquivoSelecionado, this.arquivoSelecionado.name)
+           // this.contratos.caminho_arquivo = fd;
             console.log(this.contratos)
-            this.serviceContratos.inserir(this.contratos)
+            if(this.serviceContratos.inserir(this.contratos)){
+              //document.getElementById('file').value =''
+              this.contratos = new Contratos();
+              alert("Contratos salvos com sucesso.")
+              this.$router.push('/home')
+            }else{
+              alert("Erro ao salvar Dados.")
+            }
+
           },
 
+          /*
           selecionarArquivo(event){
             this.arquivoSelecionado = event.target.files[0]
           }
+
+           */
     },
 
     created() {
