@@ -81,7 +81,7 @@
           salvarDados(){
             const fd = new FormData()
             fd.append('pdf',this.arquivoSelecionado, this.arquivoSelecionado.name)
-            this.contratos.caminho_arquivo = this.arquivoSelecionado;
+            this.contratos.caminho_arquivo = fd;
             console.log(this.contratos)
             this.serviceContratos.inserir(this.contratos)
           },

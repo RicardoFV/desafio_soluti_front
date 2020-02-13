@@ -6,26 +6,18 @@
             <div class="form-group col-md-6">
               <label for="nome_completo">Nome Completo :</label>
               <input type="text" v-model="usuarios.nome_completo" id="nome_completo" class="form-control" placeholder="Digite seu nome"/>
-              <!-- usando componentes -->
-              <mensagem :mensagem="msg"></mensagem>
             </div>
           <div class="form-group col-md-6">
             <label for="email">E-mail :</label>
             <input type="email" id="email" v-model="usuarios.email" class="form-control" placeholder="Digite seu E-mail"/>
-            <!-- usando componentes -->
-            <mensagem :mensagem="msg"></mensagem>
           </div>
           <div class="form-group col-md-6">
             <label for="senha">Senha :</label>
             <input type="password" id="senha" v-model="usuarios.senha" class="form-control" placeholder="Digite sua Senha"/>
-            <!-- usando componentes -->
-            <mensagem :mensagem="msg"></mensagem>
           </div>
           <div class="form-group col-md-6">
             <label for="repetir_senha">Repita sua Senha :</label>
             <input type="password" id="repetir_senha" class="form-control" placeholder="Repita sua Senha"/>
-            <!-- usando componentes -->
-            <mensagem :mensagem="msg"></mensagem>
           </div>
           <div class="col-6 mt-md-1">
             <my-button tipo="submit" acao="Cadastrar" id="bt_salvar" design="btn btn-block btn-success" />
@@ -61,14 +53,16 @@
       // metodo que salva as informações
       salvarDados : function (event) {
           if($('#senha').val() != $('#repetir_senha').val() ){
-            this.msg = "As senhas nao conferem"
+            alert("As senhas nao conferem")
           }else if($('#repetir_senha').val() != $('#senha').val()){
-            this.msg = "As senhas nao conferem"
+            alert("As senhas nao conferem")
           }else if($('#nome_completo').val() ==''){
-          this.msg = "Nome não pode ser vazio"
-        }else if($('#email').val() == ''){
-          this.msg = "E-mail não pode ser vazio"
-        }
+          alert("Nome não pode ser vazio")
+        }else if($('#email').val() === ''){
+          alert("E-mail não pode ser vazio")
+        }else if($('#repetir_senha').val('')  != $('#senha').val('') ){
+            alert('senhas não podem ser vazio')
+          } else{
           this.serviceUser.inserir(this.usuarios)
           alert("Usuário salvo com sucesso !")
           $('#repetir_senha').val('')
@@ -80,6 +74,7 @@
           }else{
             this.$router.push('/')
           }
+        }
 
       },
     },

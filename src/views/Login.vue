@@ -82,7 +82,7 @@
             let mySenha = calcMD5(this.usuarios.senha)
 
             if ( this.users[i].email.indexOf(this.usuarios.email) === -1 && this.users[i].senha.indexOf(mySenha) === -1){
-              alert('Usuário e/ou senha incorretos')
+              //alert('Usuário e/ou senha incorretos')
             }else{
               this.$router.push('home')
               sessionStorage.setItem('id_usuario',this.users[i].id)
