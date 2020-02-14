@@ -33,6 +33,20 @@
             <router-link class="dropdown-item" to="/usuarios">Usuários</router-link>
           </div>
         </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navcontratos"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Contratos</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <router-link class="dropdown-item" to="">Contratos Pendentes</router-link>
+          </div>
+        </li>
       </ul>
       <ul class="navbar-nav mr-sm-5">
         <li class="nav-item dropdown">

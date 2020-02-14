@@ -21,6 +21,7 @@
           <label for="situacao">Situação :</label>
           <select id="situacao" v-model="contratos.situacao" class="form-control">
             <option value="aprovado">Aprovado</option>
+            <option value="pendente">Pendente</Pendente></option>
             <option value="reprovado">Reprovado</option>
           </select>
         </div>
