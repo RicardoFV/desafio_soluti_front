@@ -39,7 +39,9 @@
           </div>
             <my-button tipo="submit" acao="Acessar" design="btn btn-success btn-block mt-4" />
         </form>
+        <mensagem :mensagem="msg"></mensagem>
       </div>
+
       <div class="col-sm-3">
         <!-- espaço vazio -->
       </div>
@@ -53,17 +55,19 @@
   import Titulo from "../components/titulo/Titulo.vue";
   import Usuarios from "../model/Usuarios";
   import ServiceUsuarios from "../service/ServiceUsuarios";
+  import Mensagem from "../components/mensagem/Memsage"
 
   export default {
     // chamado o componete
     components: {
       MyButton: Button,
       titulo: Titulo,
+      mensagem : Mensagem
     },
     data(){
       return{
-        //usuarios : new Usuarios(),
-        users:[]
+        users:[],
+        msg: ""
       }
     },
     methods:{
@@ -75,22 +79,19 @@
             }if (document.getElementById('senha').value == ''){
               alert("É necessario preencher a Senha")
 
-            }else{
-
+            }else {
+          let mySenha = calcMD5(this.usuarios.senha)
           // percorre o array de informaçoes
-          for (let i = 0; i <= this.users.length; i++){
-            let mySenha = calcMD5(this.usuarios.senha)
-
-            if ( this.users[i].email.indexOf(this.usuarios.email) === -1 && this.users[i].senha.indexOf(mySenha) === -1){
-              //alert('Usuário e/ou senha incorretos')
-            }else{
+          for (let i = 0; i <= this.users.length; i++) {
+            if (this.usuarios.email.toString() == this.users[i].email && mySenha.toString() == this.users[i].senha) {
               this.$router.push('home')
-              sessionStorage.setItem('id_usuario',this.users[i].id)
-
+              sessionStorage.setItem('id_usuario', this.users[i].id)
+              break
+            } else {
+              alert("usuario e/ou senha incorreta !")
             }
           }
         }
-
       },
     },
 
@@ -99,10 +100,10 @@
       sessionStorage.clear()
       this.usuarios = new Usuarios()
       this.serviceUser = new ServiceUsuarios(this.$resource)
-      this.serviceUser.listar()
-      .then(dados => this.users = dados, err => {
-
-      })
+      this.serviceUser
+        .listar()
+      .then(dados => this.users = dados, err =>
+        this.msg = "Sistema indisponível temporariamente, por favor tente mais tarde ")
     }
   };
 </script>

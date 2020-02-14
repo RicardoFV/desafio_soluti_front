@@ -7,26 +7,22 @@
         <div class="form-group col-md-6">
           <label for="nome_completo">Nome Completo :</label>
           <input type="text" v-model="usuarios.nome_completo" class="form-control" id="nome_completo" placeholder="Digite seu nome"/>
-          <!-- usando componentes -->
-          <mensagem :mensagem="msg"></mensagem>
+
         </div>
         <div class="form-group col-md-6">
           <label for="email">E-mail :</label>
           <input type="email"  v-model="usuarios.email" id="email" class="form-control" placeholder="Digite seu E-mail"/>
-          <!-- usando componentes -->
-          <mensagem :mensagem="msg"></mensagem>
+
         </div>
         <div class="form-group col-md-6">
           <label for="senha">Senha :</label>
           <input type="password" id="senha" v-model="usuarios.senha" class="form-control" placeholder="Digite sua Senha"/>
-          <!-- usando componentes -->
-          <mensagem :mensagem="msg"></mensagem>
+
         </div>
         <div class="form-group col-md-6">
           <label for="repetir_senha">Repita sua Senha :</label>
           <input type="password" id="repetir_senha" class="form-control" placeholder="Repita sua Senha"/>
-          <!-- usando componentes -->
-          <mensagem :mensagem="msg"></mensagem>
+
         </div>
         <div class="col-6 mt-md-1">
           <my-button tipo="submit" acao="Alterar" id="bt_salvar" design="btn btn-block btn-success" />
@@ -56,7 +52,6 @@
       return{
         msg: "",
         usuarios : new Usuarios(),
-        id:this.$route.params.id
       }
     },
     computed:{
@@ -66,22 +61,20 @@
       // metodo que altera as informaçoes do usuario
       alterarDados() {
 
-        if($('#nome_completo').val() ==''){
+        if(document.getElementById('nome_completo').value  ==''){
           this.msg = "Nome não pode ser vazio"
-        }else if($('#email').val() == ''){
+        }else if(document.getElementById('email').value == ''){
           this.msg = "E-mail não pode ser vazio"
         }else if($('#repetir_senha').val() != $('#senha').val()) {
           alert("As senhas nao conferem")
         }else{
-          this.serviceUser.atualizar(this.usuarios)
-            .then(() =>{
+            this.serviceUser.atualizar(this.usuarios)
               this.usuarios = new Usuarios()
               $('#repetir_senha').val('')
               alert("Usuário Alterado com Sucesso !")
               this.$router.push('home')
-            })
-        }
 
+        }
       },
     },
     created() {

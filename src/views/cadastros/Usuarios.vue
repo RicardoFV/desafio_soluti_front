@@ -52,31 +52,49 @@
     methods:{
       // metodo que salva as informações
       salvarDados : function (event) {
-          if($('#senha').val() != $('#repetir_senha').val() ){
-            alert("As senhas nao conferem")
-          }else if($('#repetir_senha').val() != $('#senha').val()){
-            alert("As senhas nao conferem")
-          }else if($('#nome_completo').val() ==''){
-          alert("Nome não pode ser vazio")
-        }else if($('#email').val() === ''){
-          alert("E-mail não pode ser vazio")
-        }else if($('#repetir_senha').val('')  != $('#senha').val('') ){
-            alert('senhas não podem ser vazio')
-          } else{
+
+        if (this.verificarCampos() == true) {
           this.serviceUser.inserir(this.usuarios)
-          alert("Usuário salvo com sucesso !")
-          $('#repetir_senha').val('')
+          document.getElementById('repetir_senha').value = ''
           this.usuarios = new Usuarios();
+          alert("Usuário salvo com sucesso !")
+
           // caso tenha sessão , ou seja , cadastrado, ele direciona para a tela de login,
           // senão ele vai para a tela de autenticação
-          if (sessionStorage.getItem('id_usuario')){
+          if (sessionStorage.getItem('id_usuario')) {
             this.$router.push('/home')
-          }else{
+          } else {
             this.$router.push('/')
           }
         }
 
       },
+      // metodo reponsavel por verificar os campos
+      verificarCampos(){
+        var  verificado = true
+        if($('#senha').val() != $('#repetir_senha').val() ){
+          alert("As senhas nao conferem")
+          verificado = false
+        }
+        if($('#repetir_senha').val() != $('#senha').val()){
+          alert("As senhas nao conferem")
+          verificado = false
+        }
+        if(document.getElementById('nome_completo').value == ''){
+          alert("Nome não pode ser vazio")
+          verificado = false
+        }
+        if(document.getElementById('email').value == ''){
+          alert("E-mail não pode ser vazio")
+          verificado = false
+        }
+        if(document.getElementById('repetir_senha').value =='' ||  document.getElementById('senha').value == ''){
+          alert('senhas não podem ser vazio')
+          verificado = false
+        }
+
+        return verificado
+      }
     },
     created() {
       this.serviceUser = new ServiceUsuarios(this.$resource)

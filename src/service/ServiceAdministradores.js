@@ -1,15 +1,21 @@
 // classe responsavel por fazer a comunicaçao com o backend ,
 // referente os dados do administradores.
+import {error} from "vue-resource/src/util";
+
 export default class ServiceAdministradores {
 
   // cria o construtor passando a url de comunicaçao
   constructor(resource) {
-    this._resource = resource('http://localhost:8181/administradores{/id}')
+    this._resource = resource('administradores{/id}')
   }
 
   // criaçao dos metodos de persistencia
   inserir(administradores) {
     return this._resource.save(administradores)
+      .then(null, err =>{
+        console.log(err)
+        throw new error('Impossível realizar cadastro')
+      })
   }
   deletar(id) {
     return this._resource.delete({ id })
