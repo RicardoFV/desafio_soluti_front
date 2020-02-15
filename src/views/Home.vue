@@ -25,7 +25,10 @@
         <td>{{empresa.data_abertura}}</td>
         <td>
           <my-button tipo="submit" acao="Detalhes" design="btn btn-info"/>
-          <my-button tipo="submit" acao="Editar" design="btn btn-info"/>
+        <router-link :to="{name :'alterarempresa', params:{id:empresa.id}}">
+            <my-button tipo="submit" acao="Editar" design="btn btn-info"/>
+          </router-link>
+
         </td>
       </tr>
       </tbody>

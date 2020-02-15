@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <titulo estilo="text-center mt-1 mb-1" titulo="Nova Empresa"></titulo>
 
+    <titulo v-if="id" estilo="text-center mt-1 mb-1" titulo="Alterar Empresa"></titulo>
+    <titulo v-else estilo="text-center mt-1 mb-1" titulo="Nova Empresa"></titulo>
     <form @submit.prevent="salvarDados()">
       <!-- formulario de pesquisa do CEP-->
       <div class="form-row">
@@ -252,20 +253,33 @@ export default {
     return {
       cep: "",
       msg: "",
-      empresa: new Empresas()
+      empresa: new Empresas(),
+      id:this.$route.params.id
     };
   },
   methods: {
     salvarDados() {
-      // trabalhando com sessionStorage
-      this.empresa.id_usuario = sessionStorage.getItem("id_usuario");
-      if (this.serviceEmpresa.inserir(this.empresa)) {
-        alert("Empresa Cadastrada Com Sucesso !");
-        this.$router.push("home");
-        this.empresa = new Empresas();
-      } else {
-        alert("erro ao salvar Dados");
-      }
+
+        if (this.id){
+          this.empresa.id_usuario = sessionStorage.getItem("id_usuario");
+          if (this.serviceEmpresa.atualizar(this.empresa)){
+            alert("Empresa Alterada Com Sucesso !");
+            this.$router.push("home");
+            this.empresa = new Empresas();
+          }else {
+            alert("erro ao salvar Dados");
+          }
+        }else{
+          // trabalhando com sessionStorage
+          this.empresa.id_usuario = sessionStorage.getItem("id_usuario");
+          if (this.serviceEmpresa.inserir(this.empresa)) {
+            alert("Empresa Cadastrada Com Sucesso !");
+            this.$router.push("home");
+            this.empresa = new Empresas();
+          } else {
+            alert("erro ao salvar Dados");
+          }
+        }
     },
     pequisarCep() {
       // se caso o digito seja menor que 8
@@ -300,8 +314,11 @@ export default {
   },
 
   created() {
-    //this.empresa = new Empresas()
     this.serviceEmpresa = new ServiceEmpresa(this.$resource);
+
+    if (this.id){
+        this.serviceEmpresa.consultarPorId(this.id).then(dados => this.empresa = dados)
+    }
   }
 };
 </script>

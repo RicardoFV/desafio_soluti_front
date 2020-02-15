@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <titulo estilo="text-center mt-1 mb-1" titulo="Novo Administrador"></titulo>
+    <titulo estilo="text-center mt-1 mb-1" titulo="Administrador"></titulo>
 
     <form @submit.prevent="salvarDados">
       <div class="form-row">

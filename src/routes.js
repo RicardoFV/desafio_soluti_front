@@ -7,7 +7,8 @@ import Administradores from "./views/cadastros/Administradores";
 import UsuarioAlterar from "./views/alterar/UsuarioAlterar";
 
 // Mapeando as rotas
-export const routes =[{
+export const routes =[
+  {
   path:'',
   name:'login',
   component:Login,
@@ -34,6 +35,13 @@ export const routes =[{
     component:Empresas,
     titulo: 'Empresas',
     menu:true
+  },
+  {
+    path:'/alterarempresa',
+    name:'alterarempresa',
+    component:Empresas,
+    titulo: 'Empresas',
+    menu:false
   },
   {
     path:'/contratos',

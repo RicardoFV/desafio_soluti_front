@@ -28,7 +28,7 @@ export default class ServiceEmpresa {
         })
     }
     atualizar(empresa) {
-        return this._resource.update({ id: usuario.id }, usuario)
+        return this._resource.update({id:empresa.id}, empresa)
     }
     consultarPorId(id) {
         return this._resource.get({ id }).then(resposta => resposta.json(), err =>{

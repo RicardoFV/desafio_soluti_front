@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <titulo estilo="text-center mt-1 mb-1" titulo="Novo Contrato"></titulo>
+    <titulo estilo="text-center mt-1 mb-1" titulo="Contrato"></titulo>
 
     <form @submit.prevent="salvarDados" enctype="multipart/form-data">
       <div class="form-row">
@@ -28,7 +28,7 @@
         <div class="form-group col-md-4">
           <label for="empresa">Empresa :</label>
           <select id="empresa" v-model="contratos.id_empresa" class="form-control">
-            <option v-for="d of dados" :value="d.id">{{d.razao_social}}</option>
+            <option v-for="d of dados" :value="d.id" v-if="id_user == d.id_usuario">{{d.razao_social}}</option>
           </select>
         </div>
         <!--
@@ -76,7 +76,8 @@ export default {
   data() {
     return {
       contratos: new Contratos(),
-      dados: []
+      dados: [],
+      id_user:0,
       // seleciona o arquivo
       //arquivoSelecionado:null
     };
@@ -92,7 +93,7 @@ export default {
         //document.getElementById('file').value =''
         this.contratos = new Contratos();
         alert("Contratos salvos com sucesso.");
-        this.$router.push("/home");
+        //this.$router.push("/home");
       } else {
         alert("Erro ao salvar Dados.");
       }
@@ -107,6 +108,8 @@ export default {
   },
 
   created() {
+    // passa o id da sessão para a variavel user
+    this.id_user = sessionStorage.getItem('id_usuario')
     this.serviceEmpresa = new ServiceEmpresa(this.$resource);
     this.serviceEmpresa.listar().then(
       d => (this.dados = d),
