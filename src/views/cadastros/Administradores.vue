@@ -3,15 +3,28 @@
     <titulo estilo="text-center mt-1 mb-1" titulo="Administrador"></titulo>
 
     <form @submit.prevent="salvarDados">
+
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
-          <input
-            id="nome"
-            class="form-control"
-            v-model="administradores.nome"
-            placeholder="Nome Administrador"
-          />
+          <span class="ml-3">Tem Cadastro ?</span> <input v-model="mostrar" type="checkbox">
+
+          <template v-if="mostrar">
+            <select class="form-control"  v-model="administradores.nome">
+                <option v-for="a of adms" :value="a.nome">{{a.nome}}</option>
+            </select>
+
+          </template>
+
+          <template v-else="mostrar">
+            <input
+              id="nome"
+              class="form-control"
+              v-model="administradores.nome"
+              placeholder="Nome Administrador"
+            />
+          </template>
+
         </div>
         <div class="form-group col-md-4">
           <label for="tipo">Tipo :</label>
@@ -64,7 +77,9 @@ export default {
   },
   data() {
     return {
-      dados: []
+      dados: [],
+      mostrar:true,
+      adms:[]
     };
   },
   methods: {
@@ -72,7 +87,7 @@ export default {
       if (this.serviceAdministradores.inserir(this.administradores)) {
         alert("Administador salvo com sucesso !");
         this.administradores = new Administradores();
-        this.$router.push("/home");
+       // this.$router.push("/home");
       } else {
         alert("Erro ao salvar Administrador");
       }
@@ -89,6 +104,13 @@ export default {
         err.message();
       }
     );
+
+    this.serviceAdministradores.listar()
+    .then(ad =>
+      (this.adms = ad ),
+    err =>{
+
+    });
   }
 };
 </script>
