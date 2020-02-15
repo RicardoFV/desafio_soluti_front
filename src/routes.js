@@ -5,6 +5,7 @@ import Empresas from "./views/cadastros/Empresas.vue";
 import Contratos from "./views/cadastros/Contratos";
 import Administradores from "./views/cadastros/Administradores";
 import UsuarioAlterar from "./views/alterar/UsuarioAlterar";
+import ContratosPendentes from "./views/relatorios/ContratosPendentes.vue";
 
 // Mapeando as rotas
 export const routes =[
@@ -62,6 +63,13 @@ export const routes =[
     name:'usuarioalterar',
     component:UsuarioAlterar,
     titulo: 'UsuarioAlterar',
+    menu:true
+  },
+  {
+    path:'/contratopendente',
+    name:'contratoPendente',
+    component:ContratosPendentes,
+    titulo:'ContratosPendentes',
     menu:true
   },
   {

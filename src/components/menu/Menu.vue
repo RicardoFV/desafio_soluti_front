@@ -44,7 +44,7 @@
             aria-expanded="false"
           >Contratos</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link class="dropdown-item" to="">Contratos Pendentes</router-link>
+            <router-link class="dropdown-item" to="/contratopendente">Contratos Pendentes</router-link>
           </div>
         </li>
       </ul>
