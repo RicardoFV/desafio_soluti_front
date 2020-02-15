@@ -102,7 +102,7 @@
       <div class="form-row">
         <input type="hidden" v-model="empresa.id_usuario" />
         <!-- formulario que cadastra os princiapis dados da empresa -->
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="razao_social">Razão Social :</label>
           <input
             type="text"
@@ -112,7 +112,7 @@
             placeholder="Razao Social"
           />
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="nme_fantasia">Nome Fantasia :</label>
           <input
             type="text"
@@ -120,6 +120,16 @@
             v-model="empresa.nome_fantasia"
             class="form-control"
             placeholder="Nome Fantasia"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="data_abertura">Data Abertura :</label>
+          <input
+            type="date"
+            id="data_abertura"
+            v-model="empresa.data_abertura"
+            class="form-control"
+            placeholder="Data Abertura"
           />
         </div>
         <div class="form-group col-md-3">
