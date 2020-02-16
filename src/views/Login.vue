@@ -84,7 +84,7 @@ export default {
       } else {
         let mySenha = calcMD5(this.usuarios.senha);
         // percorre o array de informaçoes
-        for (let i = 0; i <= this.users.length; i++) {
+        for (let i = 0; i < this.users.length; i++) {
           if (
             this.usuarios.email.toString() == this.users[i].email &&
             mySenha.toString() == this.users[i].senha
@@ -92,9 +92,12 @@ export default {
             this.$router.push("home");
             sessionStorage.setItem("id_usuario", this.users[i].id);
             break;
-          } else {
-            alert("usuario e/ou senha incorreta !");
+          } else{
+            // alert("usuario e/ou senha incorreta !");
+
           }
+
+          continue
         }
       }
     }

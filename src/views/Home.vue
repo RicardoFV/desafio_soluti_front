@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <titulo estilo="text-center mt-5 " titulo="Minhas Empresas"></titulo>
+    <titulo estilo="text-center mt-5 " titulo="Empresas Sem Registros"></titulo>
     <table class=" mt-0 table table-sm table-bordered table-hover">
       <thead>
       <tr align="center">
@@ -15,7 +15,7 @@
       </tr>
       </thead>
 
-      <tbody v-for="empresa of empresas" v-if="id_user == empresa.id_usuario" >
+      <tbody v-for="empresa of empresas" v-if="empresa.cnpj == null" >
       <tr align="center">
         <td>{{empresa.razao_social}}</td>
         <td>{{empresa.cnpj}}</td>
@@ -23,11 +23,10 @@
         <td>{{empresa.email}}</td>
         <td>{{empresa.data_abertura}}</td>
         <td>
-          <my-button tipo="submit" acao="Detalhes" design="btn btn-info"/>
+          <my-button tipo="submit" acao="Vincular" design="btn btn-info"/>
         <router-link :to="{name :'alterarempresa', params:{id:empresa.id}}">
             <my-button tipo="submit" acao="Editar" design="btn btn-info"/>
           </router-link>
-
         </td>
       </tr>
       </tbody>
