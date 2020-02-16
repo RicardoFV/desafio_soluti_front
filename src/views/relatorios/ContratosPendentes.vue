@@ -30,8 +30,7 @@
             </tr>
         </tbody>
       </table>
-          <!-- realizando a paginação -->
-          <paginacao :informacao="pendentes"></paginacao>
+
     </div>
 </template>
 
@@ -39,14 +38,12 @@
   import ServiceContratos from "../../service/ServiceContratos";
   import Titulo from "../../components/titulo/Titulo";
   import Button from "../../components/button/Button";
-  import paginacao from "../../components/paginacao/paginacao_tabela"
 
   export default {
 
     components:{
       titulo: Titulo,
       MyButton: Button,
-      paginacao:paginacao
     },
       data(){
         return{
