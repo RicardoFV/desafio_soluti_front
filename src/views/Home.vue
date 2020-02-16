@@ -2,8 +2,7 @@
   <div class="container">
 
     <titulo estilo="text-center mt-5 " titulo="Minhas Empresas"></titulo>
-    <table class=" mt-0 table table-sm table-bordered table-hover" summary="tabela">
-
+    <table class=" mt-0 table table-sm table-bordered table-hover">
       <thead>
       <tr align="center">
 
@@ -51,14 +50,13 @@
       return{
         empresas:[],
         id_user:0,
-        tabelaVazia:'Sem itens'
       }
     },
 
     created(){
           // passa o id da sessão para a variavel user
           this.id_user = sessionStorage.getItem('id_usuario')
-          console.log(this.id_user)
+        //  console.log(this.id_user)
           this.serviceEmpresa = new ServiceEmpresa(this.$resource)
           this.serviceEmpresa.listar()
           .then(dados => this.empresas = dados, err =>{
