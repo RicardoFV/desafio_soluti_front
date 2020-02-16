@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-
     <div id="configurarDiv" class=" mt-4 mb-3 pl-3 pr-3 pb-3">
-      <titulo estilo="text-center mt-5 " titulo="Empresas Sem Registros"></titulo>
+      <titulo estilo="text-center mt-5 " titulo="Empresas"></titulo>
       <table class=" mt-0 table table-sm table-bordered table-hover">
         <thead>
         <tr align="center">
@@ -16,7 +15,7 @@
         </tr>
         </thead>
 
-        <tbody v-for="empresa of empresas" v-if="empresa.cnpj == null" >
+        <tbody v-for="empresa of empresas" v-if="empresa.cnpj != null">
         <tr align="center">
           <td>{{empresa.razao_social}}</td>
           <td>{{empresa.cnpj}}</td>
@@ -24,30 +23,29 @@
           <td>{{empresa.email}}</td>
           <td>{{empresa.data_abertura}}</td>
           <td>
-
-              <my-button confirmar="true" tipo="submit" acao="Vincular" design="btn btn-info">
+            <router-link :to="{name :'alterarempresa', params:{id:empresa.id}}">
+              <my-button tipo="submit" acao="alterar" design="btn btn-info">
               </my-button>
-
+            </router-link>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
-
-
-
   </div>
 
 </template>
+
 <script>
-  import ServiceEmpresa from "../service/ServiceEmpresa";
-  import Button  from "../components/button/Button";
-  import Titulo from "../components/titulo/Titulo";
+  import Titulo from "../../components/titulo/Titulo";
+  import ServiceEmpresa from "../../service/ServiceEmpresa";
+  import Button from "../../components/button/Button";
   export default {
     components: {
+      titulo: Titulo,
       MyButton: Button,
-      titulo: Titulo
     },
+
     data(){
       return{
         empresas:[],
@@ -55,23 +53,20 @@
       }
     },
 
-    methods:{
-
-    },
-
     created(){
-        // passa o id da sessão para a variavel user
-        this.id_user = sessionStorage.getItem('id_usuario')
-        //  console.log(this.id_user)
-          this.serviceEmpresa = new ServiceEmpresa(this.$resource)
-          this.serviceEmpresa.listar()
-          .then(dados => this.empresas = dados, err =>{
+      // passa o id da sessão para a variavel user
+     // this.id_user = sessionStorage.getItem('id_usuario')
+      //  console.log(this.id_user)
+      this.serviceEmpresa = new ServiceEmpresa(this.$resource)
+      this.serviceEmpresa.listar()
+        .then(dados => this.empresas = dados, err =>{
 
-          })
+        })
     }
   }
 
 </script>
+
 <style>
 
 </style>

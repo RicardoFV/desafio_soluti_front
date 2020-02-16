@@ -21,14 +21,14 @@
           <label for="situacao">Situação :</label>
           <select id="situacao" v-model="contratos.situacao" class="form-control">
             <option value="aprovado">Aprovado</option>
-            <option value="pendente">Pendente</Pendente></option>
+            <option value="pendente">Pendente</option>
             <option value="reprovado">Reprovado</option>
           </select>
         </div>
         <div class="form-group col-md-4">
           <label for="empresa">Empresa :</label>
           <select id="empresa" v-model="contratos.id_empresa" class="form-control">
-            <option v-for="d of dados" :value="d.id" v-if="id_user == d.id_usuario">{{d.razao_social}}</option>
+            <option v-for="d of dados" :value="d.id">{{d.razao_social}}</option>
           </select>
         </div>
 

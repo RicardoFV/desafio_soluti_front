@@ -37,6 +37,20 @@
           <a
             class="nav-link dropdown-toggle"
             href="#"
+            id="navelista"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Meus Clientes</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <router-link class="dropdown-item" to="/listaempresa">Empresas</router-link>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
             id="navcontratos"
             role="button"
             data-toggle="dropdown"

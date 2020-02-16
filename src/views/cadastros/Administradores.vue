@@ -20,7 +20,7 @@
             <input
               id="nome"
               class="form-control"
-              v-model="administradores.nome"
+              v-model="contratos.nome"
               placeholder="Nome Administrador"
             />
           </template>
