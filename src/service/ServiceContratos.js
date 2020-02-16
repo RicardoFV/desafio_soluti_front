@@ -1,6 +1,7 @@
 // classe responsavel por fazer a comunicaçao com o backend ,
 // referente os dados do contratos.
 import {error} from "vue-resource/src/util";
+import headers from "vue-resource/src/http/headers";
 
 export default class ServiceContratos {
 

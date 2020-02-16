@@ -31,13 +31,13 @@
             <option v-for="d of dados" :value="d.id" v-if="id_user == d.id_usuario">{{d.razao_social}}</option>
           </select>
         </div>
-        <!--
+
         <div class="form-group col-md-3">
-          <label for="file">Contrato :</label>
-            <input type="file" @change="selecionarArquivo" class="form-control-file" id="file">
+          <label for="arquivo">Contrato :</label>
+            <input type="file" @change="selecionarArquivo" class="form-control-file" id="arquivo">
 
         </div>
-        -->
+
       </div>
       <!-- botao de envio -->
       <div class="form-row">
@@ -78,16 +78,16 @@ export default {
       contratos: new Contratos(),
       dados: [],
       id_user:0,
-      // seleciona o arquivo
-      //arquivoSelecionado:null
+       //seleciona o arquivo
+       arquivoSelecionado:null
     };
   },
 
   methods: {
     salvarDados() {
-      //const fd = new FormData()
-      //fd.append('pdf',this.arquivoSelecionado, this.arquivoSelecionado.name)
-      // this.contratos.caminho_arquivo = fd;
+      const fd = new FormData()
+      fd.append('file',this.arquivoSelecionado, this.arquivoSelecionado.name)
+       this.contratos.arquivo = fd;
       console.log(this.contratos);
       if (this.serviceContratos.inserir(this.contratos)) {
         //document.getElementById('file').value =''
@@ -97,14 +97,12 @@ export default {
       } else {
         alert("Erro ao salvar Dados.");
       }
-    }
-
-    /*
+    },
           selecionarArquivo(event){
-            this.arquivoSelecionado = event.target.files[0]
+            this.arquivoSelecionado = event.target.files[0] || event.dataTransfer.files
           }
 
-           */
+
   },
 
   created() {
