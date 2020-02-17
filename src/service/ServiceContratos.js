@@ -14,6 +14,9 @@ export default class ServiceContratos {
   inserir(contratos) {
     return this._resource.save(contratos)
       .then(null, err =>{
+        headers:{
+          'Content-Type: multipart/form-data'
+        }
         console.log(err)
         throw new error('Impossível realizar cadastro')
       })
