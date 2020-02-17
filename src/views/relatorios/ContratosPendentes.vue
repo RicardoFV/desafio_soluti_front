@@ -14,14 +14,14 @@
               <th scope="col-sn-2">ações</th>
             </tr>
         </thead>
-        <tbody v-for="pendente of pendentes" align="center">
+        <tbody v-for="registrada of empresasRegistradas" align="center" v-if="registrada.cnpj == null">
             <tr>
-              <td>{{pendente.nome_administrador}}</td>
-              <td>{{pendente.razao_social}}</td>
-              <td>{{pendente.cnpj}}</td>
-              <td>{{pendente.situacao}}</td>
-              <td>{{pendente.email}}</td>
-              <td>{{pendente.telefone}}</td>
+              <td>{{registrada.nome_administrador}}</td>
+              <td>{{registrada.razao_social}}</td>
+              <td>{{registrada.cnpj}}</td>
+              <td>{{registrada.situacao}}</td>
+              <td>{{registrada.email}}</td>
+              <td>{{registrada.telefone}}</td>
               <td>
 
                   <my-button tipo="submit" acao="Detalhes" design="btn btn-info"/>
@@ -47,14 +47,14 @@
     },
       data(){
         return{
-          pendentes:[]
+          empresasRegistradas:[]
         }
       },
 
       created() {
         this.serviceContratos = new ServiceContratos(this.$resource)
         this.serviceContratos.listar()
-        .then(dados => this.pendentes = dados, err => { })
+        .then(dados => this.empresasRegistradas = dados, err => { })
       }
   }
 

@@ -95,7 +95,7 @@ export default {
         //document.getElementById('file').value =''
         this.contratos = new Contratos();
         alert("Contratos salvos com sucesso.");
-        //this.$router.push("/home");
+        this.$router.push("/home");
       } else {
         alert("Erro ao salvar Dados.");
       }
