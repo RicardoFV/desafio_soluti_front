@@ -47,7 +47,7 @@
     },
       data(){
         return{
-          empresasRegistradas:[]
+          empresasRegistradas:[],
         }
       },
 

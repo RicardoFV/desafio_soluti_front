@@ -3,6 +3,10 @@
 
     <div id="configurarDiv" class=" mt-4 mb-3 pl-3 pr-3 pb-3">
       <titulo estilo="text-center mt-5 " titulo="Empresas Sem Registros"></titulo>
+      <div class="col-md-4  mt-md-2 mb-md-4">
+        <label for="pesquisar">Pesquise por Razão Social </label>
+        <input class="form-control" type="search" id="pesquisar" v-on:input="filtroempresa = $event.target.value" placeholder="Pesquisar">
+      </div>
       <table class=" mt-0 table table-sm table-bordered table-hover">
         <thead>
         <tr align="center">
@@ -16,7 +20,7 @@
         </tr>
         </thead>
 
-        <tbody v-for="empresa of empresas" v-if="empresa.cnpj == null" >
+        <tbody v-for="empresa of filtraDados" v-if="empresa.cnpj == null" >
         <tr align="center">
           <td>{{empresa.razao_social}}</td>
           <td>{{empresa.cnpj}}</td>
@@ -52,13 +56,24 @@
       return{
         empresas:[],
         id_user:0,
+        filtroempresa:'',
       }
     },
 
     methods:{
 
     },
-
+    computed:{
+      filtraDados(){
+        if (this.filtroempresa){
+          let exp = new RegExp(this.filtroempresa.trim(), 'i')
+          return this.empresas.filter(empresa =>exp.test(empresa.razao_social))
+          return []
+        }else {
+          return this.empresas
+        }
+      }
+    },
     created(){
         // passa o id da sessão para a variavel user
         this.id_user = sessionStorage.getItem('id_usuario')
