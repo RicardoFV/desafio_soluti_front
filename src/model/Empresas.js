@@ -1,7 +1,7 @@
 // classe empresa
 export default class Empresas {
 
-  constructor(id, razao_social, data_abertura, nome_fantasia, cnpj, inscricao_estadual, telefone, email, situacao, ramo_atividade, natureza_juridica, id_usuario, capital_social, cep, logradouro, complemento, bairro, localidade, uf) {
+  constructor(id, razao_social, data_abertura, nome_fantasia, cnpj =0, inscricao_estadual, telefone, email, situacao, ramo_atividade, natureza_juridica, id_usuario, capital_social, cep, logradouro, complemento, bairro, localidade, uf) {
       this.id = id;
       this.razao_social = razao_social;
       this.nome_fantasia = nome_fantasia;

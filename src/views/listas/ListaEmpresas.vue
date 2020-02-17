@@ -15,7 +15,7 @@
         </tr>
         </thead>
 
-        <tbody v-for="empresa of empresas" v-if="empresa.cnpj != null">
+        <tbody v-for="empresa of empresas" v-if="empresa.cnpj != 0  ">
         <tr align="center">
           <td>{{empresa.razao_social}}</td>
           <td>{{empresa.cnpj}}</td>

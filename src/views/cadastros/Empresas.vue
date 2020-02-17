@@ -261,7 +261,8 @@ export default {
     salvarDados() {
 
         if (this.id){
-          this.empresa.id_usuario = sessionStorage.getItem("id_usuario");
+          //this.empresa.id_usuario = 0
+
           if (this.serviceEmpresa.atualizar(this.empresa)){
             alert("Empresa Alterada Com Sucesso !");
             this.$router.push("home");
@@ -271,7 +272,8 @@ export default {
           }
         }else{
           // trabalhando com sessionStorage
-          this.empresa.id_usuario = sessionStorage.getItem("id_usuario");
+          this.empresa.id_usuario = 0
+          //sessionStorage.getItem("id_usuario");
           if (this.serviceEmpresa.inserir(this.empresa)) {
             alert("Empresa Cadastrada Com Sucesso !");
             this.$router.push("home");

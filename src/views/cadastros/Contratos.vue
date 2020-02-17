@@ -32,11 +32,13 @@
           </select>
         </div>
 
+        <!--
         <div class="form-group col-md-3">
           <label for="arquivo">Contrato :</label>
             <input type="file" @change="selecionarArquivo" class="form-control-file" id="arquivo">
 
         </div>
+        -->
 
       </div>
       <!-- botao de envio -->
@@ -79,16 +81,16 @@ export default {
       dados: [],
       id_user:0,
        //seleciona o arquivo
-       arquivoSelecionado:null
+     //  arquivoSelecionado:null
     };
   },
 
   methods: {
     salvarDados() {
-      const fd = new FormData()
-      fd.append('file',this.arquivoSelecionado, this.arquivoSelecionado.name)
-       this.contratos.arquivo = fd;
-      console.log(this.contratos);
+     // const fd = new FormData()
+      //fd.append('file',this.arquivoSelecionado, this.arquivoSelecionado.name)
+     //  this.contratos.arquivo = fd;
+     // console.log(this.contratos);
       if (this.serviceContratos.inserir(this.contratos)) {
         //document.getElementById('file').value =''
         this.contratos = new Contratos();

@@ -25,7 +25,7 @@
           <td>{{empresa.data_abertura}}</td>
           <td>
 
-              <my-button confirmar="true" tipo="submit" acao="Vincular" design="btn btn-info">
+              <my-button tipo="submit" acao="Vincular" design="btn btn-info">
               </my-button>
 
           </td>

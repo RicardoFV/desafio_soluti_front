@@ -42,7 +42,7 @@
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
-          >Meus Clientes</a>
+          >Informações</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <router-link class="dropdown-item" to="/listaempresa">Empresas</router-link>
           </div>
