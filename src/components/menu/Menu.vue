@@ -44,7 +44,8 @@
             aria-expanded="false"
           >Informações</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link class="dropdown-item" to="/listaempresa">Empresas</router-link>
+            <router-link class="dropdown-item" to="/minhasempresas">Minhas Empresas</router-link>
+            <router-link class="dropdown-item" to="/listaempresa">Empresas Registradas</router-link>
           </div>
         </li>
         <li class="nav-item dropdown">

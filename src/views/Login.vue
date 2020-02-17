@@ -93,7 +93,7 @@ export default {
             sessionStorage.setItem("id_usuario", this.users[i].id);
             break;
           } else{
-            // alert("usuario e/ou senha incorreta !");
+            alert("usuario e/ou senha incorreta !");
 
           }
 

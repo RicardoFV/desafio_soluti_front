@@ -20,7 +20,7 @@
         </tr>
         </thead>
 
-        <tbody v-for="empresa of filtraDados" v-if="empresa.cnpj == 0  && empresa.id_usuario == 0" >
+        <tbody v-for="empresa of filtraDados" v-if="empresa.cnpj == null  && empresa.id_usuario == 0" >
         <tr align="center">
           <td>{{empresa.razao_social}}</td>
           <td>{{empresa.cnpj}}</td>
@@ -87,16 +87,16 @@
     methods:{
           verificar:function(event){
             let id = event
-            //console.log(id)
+
            this.serviceEmpresa.consultarPorId(id)
             .then(d =>(this.empresaVinculo = d))
           },
            realizarVinculo:function(event){
-             this.emp.id = this.empresaVinculo.id
+             this.emp = this.empresaVinculo
              this.emp.id_usuario = sessionStorage.getItem("id_usuario");
              console.log(this.emp)
              if (this.serviceEmpresa.atualizar(this.emp)){
-               this.$router.push('/home')
+               this.$router.push('/minhasempresas')
                alert("Vinculo Realizado com Sucesso")
              }else{
                alert("Erro ao realizar vinculo")

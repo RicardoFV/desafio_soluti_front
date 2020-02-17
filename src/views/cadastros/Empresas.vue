@@ -137,6 +137,7 @@
           <label for="cnpj">CNPJ :</label>
           <input
             type="text"
+            maxlength="14"
             id="cnpj"
             v-model="empresa.cnpj"
             class="form-control"

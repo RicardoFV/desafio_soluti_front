@@ -87,8 +87,7 @@ export default {
       if (this.serviceAdministradores.inserir(this.administradores)) {
         this.administradores = new Administradores();
         alert("Administador salvo com sucesso !");
-
-       // this.$router.push("/home");
+        this.$router.push("/home");
       } else {
         alert("Erro ao salvar Administrador");
       }
