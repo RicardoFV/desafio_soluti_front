@@ -2,6 +2,7 @@
 // referente os dados do contratos.
 import {error} from "vue-resource/src/util";
 import headers from "vue-resource/src/http/headers";
+import header from "vue-resource/src/http/interceptor/header";
 
 export default class ServiceContratos {
 
@@ -12,14 +13,9 @@ export default class ServiceContratos {
 
   // criaçao dos metodos de persistencia
   inserir(contratos) {
-    return this._resource.save(contratos)
-      .then(null, err =>{
-        headers:{
-          'Content-Type: multipart/form-data'
-        }
-        console.log(err)
-        throw new error('Impossível realizar cadastro')
-      })
+   //this._resource.post(contratos, new headers('application/json; charset=utf-8'))
+
+    //new headers('multipart/form-data'))
   }
   deletar(id) {
     return this._resource.delete({ id })

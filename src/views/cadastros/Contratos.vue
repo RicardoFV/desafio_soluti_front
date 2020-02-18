@@ -2,7 +2,7 @@
   <div class="container">
     <titulo estilo="text-center mt-1 mb-1" titulo="Contrato"></titulo>
 
-    <form @submit.prevent="salvarDados" enctype="multipart/form-data">
+    <form @submit.prevent="salvarDados" enctype="multipart/form-data"">
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
@@ -32,13 +32,13 @@
           </select>
         </div>
 
-        <!--
+
         <div class="form-group col-md-3">
           <label for="arquivo">Contrato :</label>
             <input type="file" @change="selecionarArquivo" class="form-control-file" id="arquivo">
 
         </div>
-        -->
+
 
       </div>
       <!-- botao de envio -->
@@ -67,6 +67,7 @@ import Mensagem from "../../components/mensagem/Memsage.vue";
 import Contratos from "../../model/Contratos";
 import ServiceContratos from "../../service/ServiceContratos";
 import ServiceEmpresa from "../../service/ServiceEmpresa";
+
 export default {
   components: {
     // utilizando os componentes
@@ -81,16 +82,30 @@ export default {
       dados: [],
       id_user:0,
        //seleciona o arquivo
-     //  arquivoSelecionado:null
+       arquivoSelecionado:null
     };
   },
 
   methods: {
     salvarDados() {
-     // const fd = new FormData()
-      //fd.append('file',this.arquivoSelecionado, this.arquivoSelecionado.name)
-     //  this.contratos.arquivo = fd;
+      const fd = new FormData()
+      fd.append('pdf',this.arquivoSelecionado, this.arquivoSelecionado.name)
+       this.contratos.arquivo = fd;
+
+      this.$http.post('http://localhost:8181/contratos', this.contratos,{
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(res => {
+            //todo ok
+          },
+          error => {
+            //todo mal :P
+          })
+
      // console.log(this.contratos);
+      /*
       if (this.serviceContratos.inserir(this.contratos)) {
         //document.getElementById('file').value =''
         this.contratos = new Contratos();
@@ -99,15 +114,17 @@ export default {
       } else {
         alert("Erro ao salvar Dados.");
       }
+      */
     },
           selecionarArquivo(event){
-            this.arquivoSelecionado = event.target.files[0] || event.dataTransfer.files
+            this.arquivoSelecionado = event.target.files[0]
           }
 
 
   },
 
   created() {
+
     // passa o id da sessão para a variavel user
     this.id_user = sessionStorage.getItem('id_usuario')
     this.serviceEmpresa = new ServiceEmpresa(this.$resource);
@@ -119,6 +136,9 @@ export default {
     );
 
     this.serviceContratos = new ServiceContratos(this.$resource);
+
+
+
   }
 };
 </script>

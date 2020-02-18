@@ -5,7 +5,7 @@ export default class Contratos {
   {
     this.id = id;
     this.nome = nome
-    //this.arquivo = arquivo;
+    this.arquivo = arquivo;
     this.situacao = situacao;
     this.data_anexo = data_anexo;
     this.id_empresa = id_empresa;
