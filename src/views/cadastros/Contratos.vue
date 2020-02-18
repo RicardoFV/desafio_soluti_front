@@ -32,13 +32,12 @@
           </select>
         </div>
 
-
+<!--
         <div class="form-group col-md-3">
           <label for="arquivo">Contrato :</label>
             <input type="file" @change="selecionarArquivo" class="form-control-file" id="arquivo">
-
         </div>
-
+-->
 
       </div>
       <!-- botao de envio -->
@@ -82,30 +81,18 @@ export default {
       dados: [],
       id_user:0,
        //seleciona o arquivo
-       arquivoSelecionado:null
+        //arquivoSelecionado:null
     };
   },
 
   methods: {
     salvarDados() {
       const fd = new FormData()
-      fd.append('pdf',this.arquivoSelecionado, this.arquivoSelecionado.name)
-       this.contratos.arquivo = fd;
-
-      this.$http.post('http://localhost:8181/contratos', this.contratos,{
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-        .then(res => {
-            //todo ok
-          },
-          error => {
-            //todo mal :P
-          })
+      //fd.append('txt',this.arquivoSelecionado)
+       //this.contratos.arquivo = fd;
 
      // console.log(this.contratos);
-      /*
+
       if (this.serviceContratos.inserir(this.contratos)) {
         //document.getElementById('file').value =''
         this.contratos = new Contratos();
@@ -114,11 +101,16 @@ export default {
       } else {
         alert("Erro ao salvar Dados.");
       }
-      */
+
     },
+    /*
           selecionarArquivo(event){
-            this.arquivoSelecionado = event.target.files[0]
+            //this.arquivoSelecionado = event.target.files
+            let arquivo = event.target.files
+            this.arquivoSelecionado = this.record.file = arquivo[0]
           }
+          *
+     */
 
 
   },

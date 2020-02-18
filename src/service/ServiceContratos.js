@@ -13,7 +13,8 @@ export default class ServiceContratos {
 
   // criaçao dos metodos de persistencia
   inserir(contratos) {
-   //this._resource.post(contratos, new headers('application/json; charset=utf-8'))
+
+   this._resource.save(contratos)
 
     //new headers('multipart/form-data'))
   }
