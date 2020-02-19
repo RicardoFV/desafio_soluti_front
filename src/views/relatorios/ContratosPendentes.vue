@@ -14,7 +14,8 @@
               <th scope="col-sn-2">ações</th>
             </tr>
         </thead>
-        <tbody v-for="registrada of empresasRegistradas" align="center" v-if="registrada.cnpj == null">
+        <tbody v-for="registrada of empresasRegistradas" align="center"
+               v-if="registrada.situacao === 'pendente'">
             <tr>
               <td>{{registrada.nome_administrador}}</td>
               <td>{{registrada.razao_social}}</td>

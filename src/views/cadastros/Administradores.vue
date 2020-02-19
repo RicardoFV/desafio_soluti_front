@@ -7,23 +7,21 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="nome">Nome :</label>
-          <span class="ml-3">Tem Cadastro ?</span> <input v-model="mostrar" type="checkbox">
-
+          <span class="pl-3"> Tem cadastro ?  </span><input class="pl-1" type="checkbox" v-model="mostrar"/>
           <template v-if="mostrar">
-            <select class="form-control"  v-model="administradores.nome">
-                <option v-for="a of adms" :value="a.nome">{{a.nome}}</option>
+            <select id="nomes" class="form-control" v-model="administradores.nome">
+              <option v-for="a of adms" :value="a.id">{{a.nome}}</option>
             </select>
-
           </template>
 
           <template v-else="mostrar">
             <input
               id="nome"
               class="form-control"
-              v-model="contratos.nome"
+              v-model="administradores.nome"
               placeholder="Nome Administrador"
             />
-          </template>
+        </template>
 
         </div>
         <div class="form-group col-md-4">
@@ -38,7 +36,7 @@
         <div class="form-group col-md-4">
           <label for="contrato">Contrato :</label>
           <select id="contrato" v-model="administradores.id_contrato" class="form-control">
-            <option v-for="d of dados" :value="d.id">{{d.nome}}</option>
+            <option v-for="d of dados" :value="d.id_contrato">{{d.nome_contrato}}</option>
           </select>
         </div>
       </div>
@@ -78,7 +76,7 @@ export default {
   data() {
     return {
       dados: [],
-      mostrar:true,
+      mostrar:false,
       adms:[]
     };
   },
@@ -105,12 +103,13 @@ export default {
       }
     );
 
-    this.serviceAdministradores.listar()
-    .then(ad =>
-      (this.adms = ad ),
-    err =>{
+    this.serviceAdministradores.listar().then(
+      d => (this.adms = d),
+      err => {
+        err.message();
+      }
+    );
 
-    });
   }
 };
 </script>
