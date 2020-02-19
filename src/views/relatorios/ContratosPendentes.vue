@@ -1,7 +1,10 @@
 <template>
     <div class="container">
       <titulo estilo="text-center mt-5 " titulo="Contratos Pendentes"></titulo>
-
+      <div class="col-md-4 mt-md-2 mb-3">
+        <label for="pesquisar">Pesquise por CNPJ ou Razão Social </label>
+        <input class="form-control" type="search" id="pesquisar" v-on:input="filtroempresa = $event.target.value" placeholder="Pesquisar">
+      </div>
       <table class=" mt-0 table table-sm table-bordered table-hover" id="tbl_contratos_pendentes">
         <thead align="center">
             <tr>
@@ -14,7 +17,7 @@
               <th scope="col-sn-2">ações</th>
             </tr>
         </thead>
-        <tbody v-for="registrada of empresasRegistradas" align="center"
+        <tbody v-for="registrada of filtraDados" align="center"
                v-if="registrada.situacao === 'pendente'">
             <tr>
               <td>{{registrada.nome_administrador}}</td>
@@ -49,8 +52,22 @@
       data(){
         return{
           empresasRegistradas:[],
+          id_user:0,
+          filtroempresa:'',
         }
       },
+
+    computed:{
+      filtraDados(){
+        if (this.filtroempresa){
+          let exp = new RegExp(this.filtroempresa.trim(), 'i')
+          return this.empresasRegistradas.filter(empresa =>exp.test(empresa.cnpj + empresa.razao_social))
+          return []
+        }else {
+          return this.empresasRegistradas
+        }
+      }
+    },
 
       created() {
         this.serviceContratos = new ServiceContratos(this.$resource)
