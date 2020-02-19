@@ -5,7 +5,7 @@
       <div class="form-row">
         <input type="hidden" v-model="usuarios.id" />
         <div class="form-group col-md-6">
-          <label for="nome_completo">Nome Completo :</label>
+          <label for="nome_completo">Nome Completo:</label>
           <input
             type="text"
             v-model="usuarios.nome_completo"
@@ -15,7 +15,7 @@
           />
         </div>
         <div class="form-group col-md-6">
-          <label for="email">E-mail :</label>
+          <label for="email">E-mail:</label>
           <input
             type="email"
             v-model="usuarios.email"
@@ -25,7 +25,7 @@
           />
         </div>
         <div class="form-group col-md-6">
-          <label for="senha">Senha :</label>
+          <label for="senha">Senha:</label>
           <input
             type="password"
             id="senha"
@@ -35,7 +35,7 @@
           />
         </div>
         <div class="form-group col-md-6">
-          <label for="repetir_senha">Repita sua Senha :</label>
+          <label for="repetir_senha">Repita sua Senha:</label>
           <input
             type="password"
             id="repetir_senha"

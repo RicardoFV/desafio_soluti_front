@@ -5,7 +5,7 @@
     <form @submit.prevent="salvarDados" enctype="multipart/form-data"">
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="nome">Nome :</label>
+          <label for="nome">Nome:</label>
           <select id="nome" v-model="contratos.nome" class="form-control">
             <option value="contrato_social">Contrato social</option>
             <option value="registro_junta">Registro na Junta Comercial</option>
@@ -18,7 +18,7 @@
           </select>
         </div>
         <div class="form-group col-md-4">
-          <label for="situacao">Situação :</label>
+          <label for="situacao">Situação:</label>
           <select id="situacao" v-model="contratos.situacao" class="form-control">
             <option value="aprovado">Aprovado</option>
             <option value="pendente">Pendente</option>
@@ -26,7 +26,7 @@
           </select>
         </div>
         <div class="form-group col-md-4">
-          <label for="empresa">Empresa :</label>
+          <label for="empresa">Empresa:</label>
           <select id="empresa" v-model="contratos.id_empresa" class="form-control">
             <option v-for="d of dados" :value="d.id">{{d.razao_social}}</option>
           </select>
@@ -128,9 +128,6 @@ export default {
     );
 
     this.serviceContratos = new ServiceContratos(this.$resource);
-
-
-
   }
 };
 </script>

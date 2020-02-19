@@ -54,7 +54,6 @@
           <div class="modal-footer">
             <button type="button" v-on:click="realizarVinculo" data-dismiss="modal" class="btn btn-primary">Sim</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-
           </div>
         </div>
       </div>

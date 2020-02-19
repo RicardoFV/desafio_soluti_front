@@ -6,7 +6,7 @@
 
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="nome">Nome :</label>
+          <label for="nome">Nome:</label>
           <span class="pl-3"> Tem cadastro ?  </span><input class="pl-1" type="checkbox" v-model="mostrar"/>
           <template v-if="mostrar">
             <select id="nomes" class="form-control" v-model="administradores.nome">
@@ -25,7 +25,7 @@
 
         </div>
         <div class="form-group col-md-4">
-          <label for="tipo">Tipo :</label>
+          <label for="tipo">Tipo:</label>
           <select id="tipo" v-model="administradores.tipo" class="form-control">
             <option value="socio">Sócio</option>
             <option value="administrador">Administrador</option>
@@ -34,7 +34,7 @@
           </select>
         </div>
         <div class="form-group col-md-4">
-          <label for="contrato">Contrato :</label>
+          <label for="contrato">Contrato:</label>
           <select id="contrato" v-model="administradores.id_contrato" class="form-control">
             <option v-for="d of dados" :value="d.id_contrato">{{d.nome_contrato}}</option>
           </select>

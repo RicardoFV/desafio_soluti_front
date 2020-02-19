@@ -7,7 +7,7 @@
       <!-- formulario de pesquisa do CEP-->
       <div class="form-row">
         <div class="form-group col-auto">
-          <label for="numero">Cep :</label>
+          <label for="numero">Digite seu CEP:</label>
           <input
             type="text"
             size="16"
@@ -39,7 +39,7 @@
       <!-- configuraçao de endereço -->
       <div class="form-row">
         <div class="form-group col-md-2">
-          <label for="cep_recebido">Cep :</label>
+          <label for="cep_recebido">Cep:</label>
           <input
             type="text"
             id="cep_recebido"
@@ -49,7 +49,7 @@
           />
         </div>
         <div class="form-group col-md-2">
-          <label for="logradouro">Logradouro :</label>
+          <label for="logradouro">Logradouro:</label>
           <input
             type="text"
             id="logradouro"
@@ -60,7 +60,7 @@
           />
         </div>
         <div class="form-group col-md-2">
-          <label for="complemento">Complemento :</label>
+          <label for="complemento">Complemento:</label>
           <input
             type="text"
             id="complemento"
@@ -72,7 +72,7 @@
         </div>
 
         <div class="form-group col-md-2">
-          <label for="bairro">Bairro :</label>
+          <label for="bairro">Bairro:</label>
           <input
             type="text"
             id="bairro"
@@ -83,7 +83,7 @@
         </div>
 
         <div class="form-group col-md-2">
-          <label for="localidade">Localidade :</label>
+          <label for="localidade">Localidade:</label>
           <input
             type="text"
             id="localidade"
@@ -104,7 +104,7 @@
         <input type="hidden" v-model="empresa.id_usuario" />
         <!-- formulario que cadastra os princiapis dados da empresa -->
         <div class="form-group col-md-4">
-          <label for="razao_social">Razão Social :</label>
+          <label for="razao_social">Razão Social:</label>
           <input
             type="text"
             v-model="empresa.razao_social"
@@ -114,7 +114,7 @@
           />
         </div>
         <div class="form-group col-md-4">
-          <label for="nme_fantasia">Nome Fantasia :</label>
+          <label for="nme_fantasia">Nome Fantasia:</label>
           <input
             type="text"
             id="nme_fantasia"
@@ -124,7 +124,7 @@
           />
         </div>
         <div class="form-group col-md-4">
-          <label for="data_abertura">Data Abertura :</label>
+          <label for="data_abertura">Data Abertura:</label>
           <input
             type="date"
             id="data_abertura"
@@ -134,7 +134,7 @@
           />
         </div>
         <div class="form-group col-md-3">
-          <label for="cnpj">CNPJ :</label>
+          <label for="cnpj">CNPJ:</label>
           <input
             type="text"
             maxlength="14"
@@ -145,7 +145,7 @@
           />
         </div>
         <div class="form-group col-md-3">
-          <label for="email">E-mail :</label>
+          <label for="email">E-mail:</label>
           <input
             type="email"
             id="email"
@@ -155,7 +155,7 @@
           />
         </div>
         <div class="form-group col-md-2">
-          <label for="inscricao_estadual">Inscrição Estadual :</label>
+          <label for="inscricao_estadual">Inscrição Estadual:</label>
           <input
             type="number"
             min="0"
@@ -166,14 +166,14 @@
           />
         </div>
         <div class="form-group col-md-2">
-          <label for="situacao">Situação :</label>
+          <label for="situacao">Situação:</label>
           <select id="situacao" v-model="empresa.situacao" class="form-control">
             <option value="ativa">Ativa</option>
             <option value="inativa">Inativa</option>
           </select>
         </div>
         <div class="form-group col-md-2">
-          <label for="capital_social">Capital Social :</label>
+          <label for="capital_social">Capital Social:</label>
           <input
             type="number"
             min="0"
@@ -184,7 +184,7 @@
           />
         </div>
         <div class="form-group col-md-3">
-          <label for="natureza_juridica">Natureza Juridica :</label>
+          <label for="natureza_juridica">Natureza Juridica:</label>
           <select id="natureza_juridica" v-model="empresa.natureza_juridica" class="form-control">
             <option value="sociedade_anonima">Sociedade anônima</option>
             <option
@@ -196,7 +196,7 @@
           </select>
         </div>
         <div class="form-group col-md-3">
-          <label for="telefone">Telefone :</label>
+          <label for="telefone">Telefone:</label>
           <input
             type="tel"
             id="telefone"
@@ -206,7 +206,7 @@
           />
         </div>
         <div class="form-group col-md-6">
-          <label for="ramo_atividade">Ramo Atividade :</label>
+          <label for="ramo_atividade">Ramo Atividade:</label>
           <input
             type="text"
             id="ramo_atividade"
